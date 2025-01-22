@@ -51,6 +51,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "System.Text.Encodings.Web": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             }
           },
           "imports": [
@@ -65,6 +69,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
