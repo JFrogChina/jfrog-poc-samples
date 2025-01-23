@@ -28,8 +28,6 @@ jobs:
     # 配置 JFrog CLI
     - name: Setup JFrog CLI
       uses: jfrog/setup-jfrog-cli@v4
-      with:
-        version: 2.39.3  # 明确指定 JFrog CLI 的版本
 
     # 配置 Artifactory
     - name: Configure JFrog Artifactory
