@@ -25,13 +25,49 @@ jobs:
       with:
         dotnet-version: 9.x  # 使用目标 .NET 版本
 
-    # 恢复依赖
-    - name: Restore Dependencies
-      run: dotnet restore dotnet-sample/dotnet-sample.sln
+    # 配置 JFrog CLI
+    - name: Setup JFrog CLI
+      uses: jfrog/setup-jfrog-cli@v2
+      with:
+        version: 2.x.x
+
+    # 配置 Artifactory
+    - name: Configure JFrog Artifactory
+      run: |
+        jfrog rt config --url=${{ secrets.JFROG_URL }} \
+                        --user=${{ secrets.JFROG_USER }} \
+                        --password=${{ secrets.JFROG_PASSWORD }}
+
+    # 配置 NuGet 源
+    - name: Configure JFrog NuGet
+      run: |
+        jfrog rt nuget-config --repo-resolve=alex-nuget \
+                              --repo-deploy=alex-nuget \
+                              --url=${{ secrets.JFROG_URL }} \
+                              --user=${{ secrets.JFROG_USER }} \
+                              --password=${{ secrets.JFROG_PASSWORD }}
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+    # 使用 Artifactory 下载依赖
+    - name: Restore Dependencies from Artifactory
+      run: |
+        jfrog rt dotnet restore dotnet-sample/dotnet-sample.sln \
+          --build-name="DotNet-Sample-Build" \
+          --build-number="${{ github.run_id }}"
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     # 构建项目
     - name: Build Project
-      run: dotnet build dotnet-sample/dotnet-sample.sln --configuration ${{ matrix.configuration }} --no-restore
+      run: |
+        jfrog rt dotnet build dotnet-sample/dotnet-sample.sln \
+          --configuration ${{ matrix.configuration }} \
+          --no-restore \
+          --build-name="DotNet-Sample-Build" \
+          --build-number="${{ github.run_id }}"
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     # 运行测试
     - name: Run Tests
@@ -39,13 +75,22 @@ jobs:
 
     # 发布构建产物
     - name: Publish Artifacts
-      run: dotnet publish dotnet-sample/dotnet-sample.sln --configuration ${{ matrix.configuration }} --output ./output
+      run: |
+        dotnet publish dotnet-sample/dotnet-sample.sln \
+          --configuration ${{ matrix.configuration }} \
+          --output ./output
       env:
-        DOTNET_CLI_TELEMETRY_OPTOUT: 1  # 禁用遥测
+        DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
-    # 上传构建产物
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: Build-Output-${{ matrix.configuration }}
-        path: dotnet-sample/output
+    # 将构建产物上传到 Artifactory
+    - name: Upload Artifacts to Artifactory
+      run: |
+        jfrog rt upload "dotnet-sample/output/**/*" \
+          "dotnet-sample-repo/${{ matrix.configuration }}/" \
+          --build-name="DotNet-Sample-Build" \
+          --build-number="${{ github.run_id }}"
+
+    # 发布构建信息到 Artifactory
+    - name: Publish Build Info to Artifactory
+      run: |
+        jfrog rt build-publish "DotNet-Sample-Build" "${{ github.run_id }}"
