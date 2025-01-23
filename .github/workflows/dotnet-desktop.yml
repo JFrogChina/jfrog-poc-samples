@@ -29,23 +29,22 @@ jobs:
     - name: Setup JFrog CLI
       uses: jfrog/setup-jfrog-cli@v4
 
-    # 配置 Artifactory
-    - name: Configure JFrog Artifactory
-      run: |
-        jfrog rt config --url=${{ secrets.JFROG_URL }} \
-                        --user=${{ secrets.JFROG_USER }} \
-                        --password=${{ secrets.JFROG_PASSWORD }}
-
-    # 配置 NuGet 源
-    - name: Configure JFrog NuGet
-      run: |
-        jfrog rt nuget-config --repo-resolve=nuget-repo \
-                              --repo-deploy=nuget-repo \
-                              --url=${{ secrets.JFROG_URL }} \
-                              --user=${{ secrets.JFROG_USER }} \
-                              --password=${{ secrets.JFROG_PASSWORD }}
+    # This action sets up the JFrog CLI with the Artifactory URL and access token     
+    - uses: jfrog/setup-jfrog-cli@v4
       env:
-        DOTNET_CLI_TELEMETRY_OPTOUT: 1
+        JF_URL: ${{ secrets.JFROG_URL }}
+        JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} 
+
+
+
+    # This command adds a new server configuration to the JFrog CLI, as an alternative for using the setup-jfrog-cli action    
+    - run: |
+        export SERVER_ID="test"
+        jf c add $SERVER_ID --url=$URL --access-token=$ACCESS_TOKEN --interactive=false
+
+
+
+        
 
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
