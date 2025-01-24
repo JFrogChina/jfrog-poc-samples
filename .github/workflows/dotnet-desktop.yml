@@ -79,7 +79,7 @@ jobs:
     - name: Upload Artifacts to Artifactory
       run: |
         jf rt u "dotnet-sample/bin/Release/*.nupkg" \
-          "alex-nuget/dotnet-sample" \
+          $NUGET_REPO_NAME "/dotnet-sample" \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
 
