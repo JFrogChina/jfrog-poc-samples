@@ -42,7 +42,7 @@ jobs:
         jf c use $SERVER_ID
         jf c show
         jf rt ping
-        jf dotnetc --repo-resolve= ${{ env.NUGET_REPO_NAME }} --server-id-resolve=$SERVER_ID
+        jf dotnetc --repo-resolve="${{ env.NUGET_REPO_NAME }}"  --server-id-resolve=$SERVER_ID
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
       run: |
