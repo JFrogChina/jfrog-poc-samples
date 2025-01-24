@@ -56,7 +56,6 @@ jobs:
     - name: Build Project
       run: |
         jf rt dotnet build dotnet-sample/dotnet-sample.sln \
-          --configuration ${{ matrix.configuration }} \
           --no-restore \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
@@ -66,13 +65,12 @@ jobs:
 
     # 运行测试
     - name: Run Tests
-      run: dotnet test dotnet-sample/dotnet-sample.sln --configuration ${{ matrix.configuration }} --no-build
+      run: dotnet test dotnet-sample/dotnet-sample.sln --no-build
 
     # 发布构建产物
     - name: Publish Artifacts
       run: |
         dotnet publish dotnet-sample/dotnet-sample.sln \
-          --configuration ${{ matrix.configuration }} \
           --output ./output
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -81,7 +79,7 @@ jobs:
     - name: Upload Artifacts to Artifactory
       run: |
         jfrog rt upload "dotnet-sample/bin/**/*" \
-          "dotnet-sample-repo/${{ matrix.configuration }}/" \
+          $NUGET_REPO_NAME \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
 
