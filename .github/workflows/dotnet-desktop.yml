@@ -80,7 +80,7 @@ jobs:
     # 将构建产物上传到 Artifactory
     - name: Upload Artifacts to Artifactory
       run: |
-        jfrog rt upload "dotnet-sample/output/**/*" \
+        jfrog rt upload "dotnet-sample/bin/**/*" \
           "dotnet-sample-repo/${{ matrix.configuration }}/" \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
