@@ -63,3 +63,6 @@ dotnet add package System.Text.Encodings.Web --version 4.5.0
 
 2. Open the file: .github/workflows/dotnet-desktop.yml
 Replace the variable and secret with your own.
+
+3. Review the build result
+![alt text](image-1.png)
