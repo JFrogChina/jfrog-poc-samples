@@ -29,23 +29,25 @@ jobs:
     - uses: jfrog/setup-jfrog-cli@v4
       env:
         JF_URL: ${{ secrets.JFROG_URL }}
-        JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
+        JF_ACCESS_TOKEN: ${{ secrets.JFROG_ACCESS_TOKEN }}
         NUGET_REPO_NAME: "alex-nuget"
+
 
 
     # This command adds a new server configuration to the JFrog CLI, as an alternative for using the setup-jfrog-cli action    
     - run: |
         export SERVER_ID="test"
         # export NUGET_REPO_NAME="alex-nuget"
-        jf c add $SERVER_ID --url=https://soleng.jfrog.io --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
+        jf c add $SERVER_ID --url=https://soleng.jfrog.io --access-token=${{ secrets.JFROG_ACCESS_TOKEN }} --interactive=false
         jf c use $SERVER_ID
         jf c show
         jf rt ping
-        jf dotnetc --repo-resolve=${{ env.NUGET_REPO_NAME}} --server-id-resolve=$SERVER_ID
+        jf dotnetc --repo-resolve="alex-nuget" --server-id-resolve=$SERVER_ID
+
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
       run: |
-        jf rt dotnet restore dotnet-sample/dotnet-sample.sln \
+        jf dotnet restore dotnet-sample/dotnet-sample.sln \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
       env:
@@ -54,7 +56,7 @@ jobs:
     # 构建项目
     - name: Build Project
       run: |
-        jf rt dotnet build dotnet-sample/dotnet-sample.sln \
+        jf dotnet build dotnet-sample/dotnet-sample.sln \
           --no-restore \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
@@ -81,6 +83,7 @@ jobs:
           "alex-nuget/dotnet-sample" \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
+
     # 发布构建信息到 Artifactory
     - name: Publish Build Info to Artifactory
       run: |
