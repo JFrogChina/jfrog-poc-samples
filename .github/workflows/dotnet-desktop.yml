@@ -40,7 +40,7 @@ jobs:
         jf c use $SERVER_ID
         jf c show
         jf rt ping
-        jf dotnetc --repo-resolve=alex-nuget --repo-deploy=alex-nuget --server-id-resolve=$SERVER_ID --server-id-deploy=$SERVER_ID --interactive=false 
+        jf dotnetc --repo-resolve=alex-nuget --repo-deploy=alex-nuget --server-id-resolve=$SERVER_ID --interactive=false 
 
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
