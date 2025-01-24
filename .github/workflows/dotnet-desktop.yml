@@ -29,7 +29,7 @@ jobs:
     - uses: jfrog/setup-jfrog-cli@v4
       env:
         JF_URL: ${{ secrets.JFROG_URL }}
-        JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
+        JF_ACCESS_TOKEN: ${{ secrets.JFROG_ACCESS_TOKEN }}
         NUGET_REPO_NAME: "alex-nuget"
 
 
@@ -38,11 +38,11 @@ jobs:
     - run: |
         export SERVER_ID="test"
         # export NUGET_REPO_NAME="alex-nuget"
-        jf c add $SERVER_ID --url=https://soleng.jfrog.io --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
+        jf c add $SERVER_ID --url=https://soleng.jfrog.io --access-token=${{ secrets.JFROG_ACCESS_TOKEN }} --interactive=false
         jf c use $SERVER_ID
         jf c show
         jf rt ping
-        jf dotnetc --repo-resolve=${{ env.NUGET_REPO_NAME }} --server-id-resolve=$SERVER_ID
+        jf dotnetc --repo-resolve="alex-nuget" --server-id-resolve=$SERVER_ID
 
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
@@ -80,7 +80,7 @@ jobs:
     - name: Upload Artifacts to Artifactory
       run: |
         jf rt u "dotnet-sample/bin/Release/*.nupkg" \
-          "${{ env.NUGET_REPO_NAME }}/dotnet-sample" \
+          "alex-nuget/dotnet-sample" \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
 
