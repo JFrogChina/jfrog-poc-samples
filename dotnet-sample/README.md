@@ -53,3 +53,13 @@ or add it from the command line.
 ```
 dotnet add package System.Text.Encodings.Web --version 4.5.0
 ```
+
+## Integrate with Github Action
+### Refer to the action file
+
+1. Create variable and secret for GH action.
+
+![alt text](image.png)
+
+2. Open the file: .github/workflows/dotnet-desktop.yml
+Replace the variable and secret with your own.
