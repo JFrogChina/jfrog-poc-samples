@@ -78,8 +78,8 @@ jobs:
     # 将构建产物上传到 Artifactory
     - name: Upload Artifacts to Artifactory
       run: |
-        jfrog rt upload "dotnet-sample/bin/**/*" \
-          $NUGET_REPO_NAME \
+        jf rt u "dotnet-sample/bin/Release/*.nupkg" \
+          "alex-nuget/dotnet-sample" \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
 
