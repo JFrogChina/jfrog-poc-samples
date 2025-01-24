@@ -25,10 +25,6 @@ jobs:
       with:
         dotnet-version: 9.x  # 使用目标 .NET 版本
 
-    # 配置 JFrog CLI
-    - name: Setup JFrog CLI
-      uses: jfrog/setup-jfrog-cli@v4
-
     # This action sets up the JFrog CLI with the Artifactory URL and access token     
     - uses: jfrog/setup-jfrog-cli@v4
       env:
