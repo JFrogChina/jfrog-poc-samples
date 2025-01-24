@@ -36,11 +36,12 @@ jobs:
     # This command adds a new server configuration to the JFrog CLI, as an alternative for using the setup-jfrog-cli action    
     - run: |
         export SERVER_ID="test"
+        export NUGET_REPO_NAME="alex-nuget"
         jf c add $SERVER_ID --url=https://soleng.jfrog.io --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
         jf c use $SERVER_ID
         jf c show
         jf rt ping
-        jf dotnetc --repo-resolve="alex-nuget" --repo-deploy="alex-nuget" --server-id-resolve=$SERVER_ID --interactive=false 
+        jf dotnetc --repo-resolve=$NUGET_REPO_NAME --repo-deploy=$NUGET_REPO_NAME --server-id-resolve=$SERVER_ID --interactive=false 
 
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
