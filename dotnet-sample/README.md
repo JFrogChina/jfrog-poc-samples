@@ -59,10 +59,10 @@ dotnet add package System.Text.Encodings.Web --version 4.5.0
 
 1. Create variable and secret for GH action.
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 2. Open the file: .github/workflows/dotnet-desktop.yml
 Replace the variable and secret with your own.
 
 3. Review the build result
-![alt text](image-1.png)
+![alt text](images/image-1.png)
