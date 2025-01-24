@@ -41,15 +41,15 @@ jobs:
     - run: |
         export SERVER_ID="test"
         jf c add $SERVER_ID --url=$URL --access-token=$ACCESS_TOKEN --interactive=false
-
-
-
-        
+        jf c use $SERVER_ID
+        jf c show
+        jf rt ping
+        jf dotnetc --repo-resolve=alex-nuget --repo-deploy=alex-nuget --server-id-resolve=$SERVER_ID --server-id-deploy=$SERVER_ID --interactive=false 
 
     # 使用 Artifactory 下载依赖
     - name: Restore Dependencies from Artifactory
       run: |
-        jfrog rt dotnet restore dotnet-sample/dotnet-sample.sln \
+        jf rt dotnet restore dotnet-sample/dotnet-sample.sln \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
       env:
@@ -58,11 +58,12 @@ jobs:
     # 构建项目
     - name: Build Project
       run: |
-        jfrog rt dotnet build dotnet-sample/dotnet-sample.sln \
+        jf rt dotnet build dotnet-sample/dotnet-sample.sln \
           --configuration ${{ matrix.configuration }} \
           --no-restore \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
+        
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
