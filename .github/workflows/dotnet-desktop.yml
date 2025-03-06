@@ -27,7 +27,7 @@ jobs:
     # This action sets up the JFrog CLI with the Artifactory URL and access token     
     - uses: jfrog/setup-jfrog-cli@v4
       env:
-        JF_URL: ${{ secrets.JFROG_URL }}
+        JF_URL: ${{ vars.JFROG_URL }}
         JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
 
 
@@ -84,3 +84,4 @@ jobs:
       run: |
         jfrog rt build-publish "DotNet-Sample-Build" "${{ github.run_id }}"
         jf bs DotNet-Sample-Build "${{ github.run_id }}"
+
