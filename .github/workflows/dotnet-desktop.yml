@@ -12,9 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
 
     steps:
     # Checkout Code
