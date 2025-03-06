@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-samples\\dotnet-sample\\MyProject.csproj": {}
+    "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\MyProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-samples\\dotnet-sample\\MyProject.csproj": {
+    "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\MyProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-samples\\dotnet-sample\\MyProject.csproj",
+        "projectUniqueName": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\MyProject.csproj",
         "projectName": "MyProject",
-        "projectPath": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-samples\\dotnet-sample\\MyProject.csproj",
+        "projectPath": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\MyProject.csproj",
         "packagesPath": "C:\\Users\\blade\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-samples\\dotnet-sample\\obj\\",
+        "outputPath": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

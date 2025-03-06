@@ -17,15 +17,15 @@ jobs:
         configuration: [Debug, Release]
 
     steps:
-    # 检出代码
+    # Checkout Code
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # 设置 .NET SDK
+    # set up.NET SDK
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.x  # 使用目标 .NET 版本
+        dotnet-version: 9.x 
 
     # This action sets up the JFrog CLI with the Artifactory URL and access token     
     - uses: jfrog/setup-jfrog-cli@v4
@@ -43,7 +43,7 @@ jobs:
         jf c show
         jf rt ping
         jf dotnetc --repo-resolve="${{ env.NUGET_REPO_NAME }}"  --server-id-resolve=$SERVER_ID
-    # 使用 Artifactory 下载依赖
+    # Restore Dependencies from Artifactory
     - name: Restore Dependencies from Artifactory
       run: |
         jf rt dotnet restore dotnet-sample/dotnet-sample.sln \
@@ -52,7 +52,7 @@ jobs:
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
-    # 构建项目
+    # Build Project
     - name: Build Project
       run: |
         jf rt dotnet build dotnet-sample/dotnet-sample.sln \
@@ -63,11 +63,11 @@ jobs:
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
-    # 运行测试
+    # Run Tests
     - name: Run Tests
       run: dotnet test dotnet-sample/dotnet-sample.sln --no-build
 
-    # 发布构建产物
+    # Publish Artifacts
     - name: Publish Artifacts
       run: |
         dotnet publish dotnet-sample/dotnet-sample.sln \
@@ -75,14 +75,14 @@ jobs:
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
-    # 将构建产物上传到 Artifactory
+    # Upload Artifacts to Artifactory
     - name: Upload Artifacts to Artifactory
       run: |
         jf rt u "dotnet-sample/bin/Release/*.nupkg" \
           "${{ env.NUGET_REPO_NAME }}/dotnet-sample" \
           --build-name="DotNet-Sample-Build" \
           --build-number="${{ github.run_id }}"
-    # 发布构建信息到 Artifactory
+    # Publish Build Info to Artifactory
     - name: Publish Build Info to Artifactory
       run: |
         jfrog rt build-publish "DotNet-Sample-Build" "${{ github.run_id }}"
