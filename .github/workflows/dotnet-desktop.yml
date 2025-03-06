@@ -83,5 +83,5 @@ jobs:
     - name: Publish Build Info to Artifactory
       run: |
         jfrog rt build-publish "DotNet-Sample-Build" "${{ github.run_id }}"
-        jf bs DotNet-Sample-Build "${{ github.run_id }}"  --fail=false  
+        jf bs DotNet-Sample-Build "${{ github.run_id }}"  
 
