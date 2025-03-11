@@ -1,70 +1,60 @@
-# Python Project with Artifactory Dependency Management
+# Python Project Setup for Artifactory
 
-## 1. Create a Python Project
+## Prerequisites
+- macOS system
+- Python 3.x installed
+- Access to Artifactory instance
 
-1. Create a project directory:
-   ```bash
-   mkdir my_python_project
-   cd my_python_project
+## 1. Set Up the Project
+### Navigate to the project directory:
+```sh
+cd ./python
+```
 
-Create a requirements.txt file to manage dependencies:
-
-touch requirements.txt
-
-Add project files, e.g., main.py:
-
-touch main.py
+### Ensure `requirements.txt` file exists to manage dependencies:
+```sh
+ls requirements.txt
+```
 
 ## 2. Set Up Artifactory for Dependency Management
-Configure pip to use Artifactory: Create or edit the pip configuration file:
+### Configure pip to use Artifactory:
+Create or edit the pip configuration file:
 
-On Linux/macOS: ~/.config/pip/pip.conf
-On Windows: $env:APPDATA\pip\pip.ini
+On macOS:
+```sh
+mkdir -p ~/.pip
+vi ~/.pip/pip.conf
+```
+
 Add the following:
-
+```ini
 [global]
-index-url = https://<USERNAME>:<PASSWORD>@<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME>/simple/
-trusted-host = <ARTIFACTORY_URL>
-
-Replace <ARTIFACTORY_URL> and <REPO_NAME> with your Artifactory instance details.
+index-url = https://<USERNAME>:<PASSWORD>@<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME>/simple
+```
+Replace `<USERNAME>`, `<PASSWORD>`, `<ARTIFACTORY_URL>`, and `<REPO_NAME>` with your Artifactory instance details.
 
 ## 3. Install Dependencies
-Add dependencies to requirements.txt, e.g.:
 
-flask==2.2.2
-requests==2.28.1
-
-Install them:
-
+### Install the dependencies:
+```sh
 pip install -r requirements.txt
+```
 
-## 4. Generate a Distribution Package 
-If creating and uploading your own package:
+## 4. Generate a Distribution Package
 
-Create a setup.py file:
-
-from setuptools import setup, find_packages
-
-setup(
-    name="my_python_project",
-    version="0.1.0",
-    packages=find_packages(),
-    install_requires=[
-        "flask==2.2.2",
-        "requests==2.28.1",
-    ],
-)
-
-Build the package:
-
-pip install setuptools
-
+### Build the package:
+```sh
 python setup.py sdist
+```
 
 ## 5. Upload Your Package to Artifactory
-Install twine:
-
+### Install `twine`:
+```sh
 pip install twine
-Upload the package:
+```
 
-twine upload --repository-url https://<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME>/ dist/*
+### Upload the package:
+```sh
+twine upload --repository-url https://<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME> dist/*
+```
+Replace `<ARTIFACTORY_URL>` and `<REPO_NAME>` with your Artifactory instance details.
