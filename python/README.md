@@ -29,9 +29,9 @@ vi ~/.pip/pip.conf
 Add the following:
 ```ini
 [global]
-index-url = https://<USERNAME>:<PASSWORD>@<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME>/simple
+index-url = https://<USERNAME>:<PASSWORD>@<ARTIFACTORY_URL>/artifactory/api/pypi/<VIRTUAL_REPO_NAME>/simple
 ```
-Replace `<USERNAME>`, `<PASSWORD>`, `<ARTIFACTORY_URL>`, and `<REPO_NAME>` with your Artifactory instance details.
+Replace `<USERNAME>`, `<PASSWORD>`, `<ARTIFACTORY_URL>`, and `<VIRTUAL_REPO_NAME>` with your Artifactory instance details.
 
 ## 3. Install Dependencies
 
