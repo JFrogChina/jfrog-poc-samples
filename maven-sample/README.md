@@ -16,6 +16,7 @@ Before proceeding with the commands below, ensure that you have configured three
 - `maven-local`: A local repository for internal packages.
 - `maven-remote`: A remote repository pointing to an external maven registry.
 - `maven-virtual`: A virtual repository that aggregates both `maven-local` and `maven-remote`.
+Set the `maven-local` as the default deployment repository.
 
 Your Python builds and resolutions will typically point to `maven-virtual`.
 
