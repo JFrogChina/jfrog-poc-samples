@@ -55,16 +55,22 @@ Create or edit the pip configuration file:
 
 On macOS:
 ```sh
-mkdir -p ~/.pip
-vi ~/.pip/pip.conf
+vi ~/.pypirc
+
+
 ```
 
 Add the following:
 ```ini
-[global]
-index-url = https://<USERNAME>:<PASSWORD>@<ARTIFACTORY_URL>/artifactory/api/pypi/<VIRTUAL_REPO_NAME>/simple
+[distutils]
+index-servers = alex-pypi
+ 
+[alex-pypi]
+repository = https://<Artifactory-instance>.jfrog.io/artifactory/api/pypi/alex-pypi
+username = <USERNAME>
+password = <PASSWORD>
 ```
-Replace `<USERNAME>`, `<PASSWORD>`, `<ARTIFACTORY_URL>`, and `<VIRTUAL_REPO_NAME>` with your Artifactory instance details.
+Replace `<USERNAME>`, `<PASSWORD>`, `<Artifactory-instance>`, and `alex-pypi` with your Artifactory instance details.
 
 ## 3. Install Dependencies
 
@@ -103,6 +109,7 @@ Replace `<ARTIFACTORY_URL>` and `<REPO_NAME>` with your Artifactory instance det
 ### URL of the Uploaded Package
 You can view the uploaded package at:
 ```
-https://<ARTIFACTORY_URL>/artifactory/webapp/#/artifacts/browse/tree/General/pypi-local/<PACKAGE_PATH>
+
+https://<ARTIFACTORY_URL>/ui/repos/tree/Xray/<pypi-local>/my-python-project/0.1.0/my_python_project-0.1.0.tar.gz
 ```
-Replace `<ARTIFACTORY_URL>` and `<PACKAGE_PATH>` with your Artifactory instance details and the path to your uploaded package.
+Replace `<ARTIFACTORY_URL>` and `<ypi-local>` with your Artifactory instance details and the path to your uploaded package.
