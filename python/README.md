@@ -1,133 +1,77 @@
-# Python Project Setup for Artifactory
+# Python Build Instructions with JFrog Artifactory
 
-## Prerequisites
-- macOS system
-- Python 3.x installed
-- Access to Artifactory instance
+## Prerequisites (especially for macOS users)
+1. **Python and pip**  
+   Ensure that Python (3.x preferred) and pip are installed.  
+   *You can verify by running:*  
+   ```bash
+   python --version
+   pip --version
+   ```
 
-## 1. Set Up the Project
-### Navigate to the project directory:
-```sh
-cd ./python
+2. **JFrog CLI**  
+   Install the JFrog CLI. If you have Homebrew on macOS, you can do:
+   ```bash
+   brew install jfrog-cli
+   ```
+   Otherwise, refer to the JFrog CLI documentation for other installation methods.
+
+## Setting Up Repositories in Artifactory
+Before proceeding with the commands below, ensure that you have configured three repositories in Artifactory:
+- `pypi-local`: A local repository for internal packages.
+- `pypi-remote`: A remote repository pointing to an external PyPI registry.
+- `pypi-virtual`: A virtual repository that aggregates both `pypi-local` and `pypi-remote`.
+
+Your Python builds and resolutions will typically point to `pypi-virtual`.
+
+## Step-by-Step Instructions
+### Configure Artifactory (JFrog CLI config)
+```bash
+jf c add
+```
+Follow the interactive prompts to add your Artifactory URL, credentials, and default repository settings.
+
+### Configure the project's resolution repository (`pypi-virtual`)
+```bash
+jf rt pipc
+```
+When prompted, specify the virtual repository name (e.g., `pypi-virtual`).
+
+### Install project dependencies with pip from Artifactory
+```bash
+jf rt pipi -r requirements.txt --build-name=my-pip-build --build-number=1 --module=jfrog-python-example
 ```
 
-### Ensure `requirements.txt` file exists to manage dependencies:
-```sh
-ls requirements.txt
+### Configure JFrog Xray to Scan All Builds
+Before building, ensure that JFrog Xray is configured to scan all builds:
+
+Refer to this link: https://jfrog.com/help/r/xray-how-to-index-and-scan-all-builds-in-xray-in-the-unified-platform/xray-how-to-index-and-scan-all-builds-in-xray-in-the-unified-platform
+
+### Package the project
+Create distribution archives (tar.gz and whl):
+```bash
+python setup.py sdist bdist_wheel
+```
+This command will generate `.tar.gz` and `.whl` files under the `dist/` directory.
+
+### Upload the packages to the pypi repository in Artifactory:
+```bash
+jf rt u dist/ pypi-virtual/ --build-name=my-pip-build --build-number=1 --module=jfrog-python-example
+```
+Adjust `pypi-virtual/` to your specific repository path if needed (e.g., `pypi-local/` or your virtual repository).
+
+### Collect environment variables
+Add them to the build info:
+```bash
+jf rt bce my-pip-build 1
 ```
 
-### Create Artifactory Repositories for PyPI
-#### Create a Local Repository
-1. Log in to your Artifactory instance.
-2. Go to the "Admin" tab.
-3. Under "Repositories", select "Local".
-4. Click "New" and choose "pypi" as the package type.
-5. Name the repository (e.g., `pypi-local`).
-6. Save the repository.
-
-#### Create a Remote Repository
-1. Under "Repositories", select "Remote".
-2. Click "New" and choose "pypi" as the package type.
-3. Name the repository (e.g., `pypi-remote`).
-4. Set the URL to the PyPI registry (e.g., `https://pypi.org`).
-5. Save the repository.
-
-#### Create a Virtual Repository
-1. Under "Repositories", select "Virtual".
-2. Click "New" and choose "pypi" as the package type.
-3. Name the repository (e.g., `pypi-virtual`).
-4. Add the local and remote repositories created earlier to the virtual repository.
-5. Save the repository.
-
-### Add the Local Repository to JFrog Xray Indexed Repositories
-1. Log in to your JFrog Platform.
-2. Go to the "Administrator" module.
-3. Navigate to "Xray" > "Index Repositories".
-4. Click "Add Repositories".
-5. Select the local repository (e.g., `pypi-local`) to be indexed by Xray.
-6. Save the changes.
-
-![](images/image.png)
-
-## 2. Set Up Artifactory for Dependency Management
-### Configure pip to use Artifactory:
-Create or edit the pip configuration file:
-
-On macOS:
-```sh
-vi ~/.pypirc
+### Publish the build info to Artifactory:
+```bash
+jf rt bp my-pip-build 1
 ```
 
-Add the following:
-```ini
-[distutils]
-index-servers = alex-pypi
- 
-[alex-pypi]
-repository = https://<Artifactory-instance>.jfrog.io/artifactory/api/pypi/alex-pypi
-username = <USERNAME>
-password = <PASSWORD>
-```
-Replace `<USERNAME>`, `<PASSWORD>`, `<Artifactory-instance>`, and `alex-pypi` with your Artifactory instance details.
+## Summary
+By following these steps, you will configure Artifactory, install your dependencies from a virtual PyPI repository, build your Python distribution artifacts, upload them to Artifactory, and record build information that can be tracked via the Artifactory build browser.
 
-## 3. Install Dependencies
-
-### Add a known critically vulnerable third-party Python package to `requirements.txt`:
-```
-requests==2.25.1
-django==1.11.29  # Known critical vulnerability
-```
-
-### Install the dependencies:
-```sh
-pip install -r requirements.txt
-```
-
-## 4. Generate a Distribution Package
-
-### Create a `setup.py` file with dependencies:
-```python
-from setuptools import setup, find_packages
-
-setup(
-    name='my_python_project',
-    version='0.1.0',
-    packages=find_packages(),
-    install_requires=[
-        'requests==2.25.1',
-        'django==1.11.29',  # Known critical vulnerability
-    ],
-)
-```
-
-### Build the package:
-```sh
-python setup.py sdist
-```
-
-## 5. Upload Your Package to Artifactory
-### Install `twine`:
-```sh
-pip install twine
-```
-
-### Upload the package:
-```sh
-twine upload --repository-url https://<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME> dist/*
-```
-Replace `<ARTIFACTORY_URL>` and `<REPO_NAME>` with your Artifactory instance details.
-
-## 6. View the Uploaded Python File and See the Xray Results
-1. Log in to your Artifactory instance.
-2. Navigate to the "Artifacts" tab.
-3. Browse to the `pypi-local` repository and locate your uploaded Python package.
-4. Click on the package to view its details.
-5. Go to the "Xray" tab to see the security scan results.
-6. Review any vulnerabilities or issues detected by Xray and take appropriate action.
-
-### URL of the Uploaded Package
-You can view the uploaded package at:
-```
-https://<ARTIFACTORY_URL>/ui/repos/tree/Xray/<pypi-local>/my-python-project/0.1.0/my_python_project-0.1.0.tar.gz
-```
-Replace `<ARTIFACTORY_URL>` and `<pypi-local>` with your Artifactory instance details and the path to your uploaded package.
+Happy Building!
