@@ -18,7 +18,7 @@ Before proceeding with the commands below, ensure that you have configured three
 - `maven-virtual`: A virtual repository that aggregates both `maven-local` and `maven-remote`.
 Set the `maven-local` as the default deployment repository.
 
-Your Python builds and resolutions will typically point to `maven-virtual`.
+Your Maven builds and resolutions will typically point to `maven-virtual`.
 
 ## Step-by-Step Instructions
 ### Configure Artifactory (JFrog CLI config)
@@ -27,7 +27,7 @@ jf c add
 ```
 Follow the interactive prompts to add your Artifactory URL, credentials, and default repository settings.
 
-### Configure the project's resolution repository (`pypi-virtual`)
+### Configure the project's resolution repository (`maven-virtual`)
 ```bash
 jf mvnc
 ```
