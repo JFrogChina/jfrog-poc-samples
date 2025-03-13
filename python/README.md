@@ -56,8 +56,6 @@ Create or edit the pip configuration file:
 On macOS:
 ```sh
 vi ~/.pypirc
-
-
 ```
 
 Add the following:
@@ -74,12 +72,33 @@ Replace `<USERNAME>`, `<PASSWORD>`, `<Artifactory-instance>`, and `alex-pypi` wi
 
 ## 3. Install Dependencies
 
+### Add a known critically vulnerable third-party Python package to `requirements.txt`:
+```
+requests==2.25.1
+django==1.11.29  # Known critical vulnerability
+```
+
 ### Install the dependencies:
 ```sh
 pip install -r requirements.txt
 ```
 
 ## 4. Generate a Distribution Package
+
+### Create a `setup.py` file with dependencies:
+```python
+from setuptools import setup, find_packages
+
+setup(
+    name='my_python_project',
+    version='0.1.0',
+    packages=find_packages(),
+    install_requires=[
+        'requests==2.25.1',
+        'django==1.11.29',  # Known critical vulnerability
+    ],
+)
+```
 
 ### Build the package:
 ```sh
@@ -109,7 +128,6 @@ Replace `<ARTIFACTORY_URL>` and `<REPO_NAME>` with your Artifactory instance det
 ### URL of the Uploaded Package
 You can view the uploaded package at:
 ```
-
 https://<ARTIFACTORY_URL>/ui/repos/tree/Xray/<pypi-local>/my-python-project/0.1.0/my_python_project-0.1.0.tar.gz
 ```
-Replace `<ARTIFACTORY_URL>` and `<ypi-local>` with your Artifactory instance details and the path to your uploaded package.
+Replace `<ARTIFACTORY_URL>` and `<pypi-local>` with your Artifactory instance details and the path to your uploaded package.
