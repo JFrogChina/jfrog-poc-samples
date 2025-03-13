@@ -1,0 +1,12 @@
+image: docker:git
+services:
+- docker:dind
+stages:
+- build
+build:
+ image: maven:3.5.4-jdk-8-alpine
+ stage: build
+ script:
+
+
+    - mvn deploy -s settings.xml
