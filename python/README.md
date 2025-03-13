@@ -46,7 +46,7 @@ ls requirements.txt
 4. Click "Add Repositories".
 5. Select the local repository (e.g., `pypi-local`) to be indexed by Xray.
 6. Save the changes.
-
+![](images/image.png)
 ## 2. Set Up Artifactory for Dependency Management
 ### Configure pip to use Artifactory:
 Create or edit the pip configuration file:
