@@ -52,6 +52,8 @@ jf rt bag
 jf rt bce jas-demo  1 
 jf rt bp  jas-demo  1
 ```
+View Xray scan results from the out put of this command.
+
 
 ##  Docker build and scan
 ```
