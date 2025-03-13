@@ -46,7 +46,9 @@ ls requirements.txt
 4. Click "Add Repositories".
 5. Select the local repository (e.g., `pypi-local`) to be indexed by Xray.
 6. Save the changes.
+
 ![](images/image.png)
+
 ## 2. Set Up Artifactory for Dependency Management
 ### Configure pip to use Artifactory:
 Create or edit the pip configuration file:
@@ -89,3 +91,18 @@ pip install twine
 twine upload --repository-url https://<ARTIFACTORY_URL>/artifactory/api/pypi/<REPO_NAME> dist/*
 ```
 Replace `<ARTIFACTORY_URL>` and `<REPO_NAME>` with your Artifactory instance details.
+
+## 6. View the Uploaded Python File and See the Xray Results
+1. Log in to your Artifactory instance.
+2. Navigate to the "Artifacts" tab.
+3. Browse to the `pypi-local` repository and locate your uploaded Python package.
+4. Click on the package to view its details.
+5. Go to the "Xray" tab to see the security scan results.
+6. Review any vulnerabilities or issues detected by Xray and take appropriate action.
+
+### URL of the Uploaded Package
+You can view the uploaded package at:
+```
+https://<ARTIFACTORY_URL>/artifactory/webapp/#/artifacts/browse/tree/General/pypi-local/<PACKAGE_PATH>
+```
+Replace `<ARTIFACTORY_URL>` and `<PACKAGE_PATH>` with your Artifactory instance details and the path to your uploaded package.
