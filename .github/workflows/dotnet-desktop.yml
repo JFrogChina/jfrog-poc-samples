@@ -35,7 +35,7 @@ jobs:
     - run: |
         export SERVER_ID="test"
         # export NUGET_REPO_NAME="alex-nuget"
-        jf c add $SERVER_ID --url=https://soleng.jfrog.io --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
+        jf c add $SERVER_ID --url=${{ secrets.JFROG_URL}} --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
         jf c use $SERVER_ID
         jf c show
         jf rt ping
