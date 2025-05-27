@@ -1,4 +1,4 @@
-# 🏗️ JFrog SaaS Trial Workshop Guide
+# 🏗️ JFrog SaaS Trial Workshop Guide - Basic Maven build and Xray scanning
 
 Welcome to the JFrog SaaS Trial Workshop! 🎓 This guide will help you get started with JFrog SaaS, set up your trial environment, and practice building a Maven project using our GitHub sample repository.
 
@@ -134,3 +134,14 @@ Login to your JFrog SaaS instance:
 ✅ Navigate to Artifactory → Artifacts to see your deployed artifacts.
 ✅ Navigate to Builds to view the build information (sample-maven-build).
 
+🔒 8. Add sample-maven-local and Build to Xray Indexing
+To enable security scanning in Xray:
+
+1️⃣ Go to JFrog Xray → index resource.
+2️⃣ Add the following resources to the watch:
+
+Repositories: Add sample-maven-local.
+
+Builds: Add sample-maven-build.
+
+✅ This will enable Xray to scan both the repository and your build for vulnerabilities, licenses, and compliance issues.
