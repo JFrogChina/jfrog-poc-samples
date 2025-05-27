@@ -92,7 +92,6 @@ Copy the generated encrypted password and use it in the CLI configuration.
 🛠️ 5. Configure Maven with jf mvnc
 Run the following to configure Maven:
 
-bash
 
 cd maven-sample
 jf mvnc
@@ -145,3 +144,14 @@ Repositories: Add sample-maven-local.
 Builds: Add sample-maven-build.
 
 ✅ This will enable Xray to scan both the repository and your build for vulnerabilities, licenses, and compliance issues.
+
+9. Review the log4j vulnerability is applicable
+![img_1.png](img_1.png)
+
+## Curation
+
+1. Create a condition for curation policy.
+
+Administrator -> Curation Settings -> Create Condition.
+
+![img.png](img.png)
