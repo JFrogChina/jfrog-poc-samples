@@ -4,6 +4,10 @@ Welcome to the JFrog SaaS Trial Workshop! 🎓 This guide will help you get star
 
 ---
 
+## Prerequisite
+- Java 8 and above
+- Maven 3.6.x
+
 ## 🚀 1. Apply for a JFrog SaaS Trial
 
 Before we begin, please apply for a JFrog SaaS trial environment:
