@@ -131,5 +131,5 @@ JFrog Advanced Security find out this log4j package is true positive and you can
    jf mvn deploy --build-name=sample-maven-build --build-number=2
    jf rt bp sample-maven-build 2
    ```
-
+The build should be successful and the issue was fixed.
 > **Happy building and stay secure! 🚀**
