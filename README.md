@@ -19,7 +19,6 @@ This guide will help you get started with JFrog SaaS, set up your trial environm
    Please ensure you have access to:
    - ✅ **JFrog Artifactory (SaaS)**
    - ✅ **JFrog Xray** 
-   - ✅ **JFrog Advanced Security** 
 
 ---
 
@@ -36,6 +35,7 @@ This guide will help you get started with JFrog SaaS, set up your trial environm
 
 ## 🏗️ 3. Create Maven Repositories (Quick Repository Creation)
 
+![img_6.png](img_6.png)
 1. Log in to your JFrog SaaS Platform.
 2. Click **Quick Repository Creation** (top-right).
 3. Select **Maven** as the package type.
@@ -136,7 +136,7 @@ jf rt bp sample-maven-build 1
 
 ---
 ### 9.2 Curation: Block log4j-2.14.0.jar
-
+![img_7.png](img_7.png)
 1. **Create a condition to block `log4j-2.14.0.jar`:**  
    Administrator → Curation Settings → Create Condition  
    ![img.png](img.png)
