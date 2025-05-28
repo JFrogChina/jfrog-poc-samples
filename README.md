@@ -10,7 +10,9 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
 ## 🚀 Getting Started
 
 ### 1. Apply for JFrog SaaS Trial
-1. [Apply for JFrog SaaS Trial](https://jfrog.com/start-free/)
+1. [Apply for JFrog SaaS Trial](https://jfrog.com/start-free/)  
+Select "14-Day Free Trial", it will give you own JFrog Platform.
+![alt text](images/trial.png)
 2. Ensure you have access to:
    - ✅ **JFrog Artifactory (SaaS)**
    - ✅ **JFrog Xray** 
@@ -26,9 +28,9 @@ cd jfrog-poc-samples/maven-sample
 1. Log in to JFrog SaaS Platform
 2. Click **Quick Repository Creation** (top-right)
 3. Select **Maven** and create:
-   - Local Repo: `sample-maven-local`
+   - Local Repo: `sample-libs-snapshot-local` `sample-libs-release-local`
    - Remote Repo: `sample-maven-remote`
-   - Virtual Repo: `sample-maven`
+   - Virtual Repo: `sample-libs-snapshot` `sample-libs-release`
 
 ### 4. Configure JFrog CLI
 1. [Download JFrog CLI](https://jfrog.com/getcli/)
@@ -38,8 +40,8 @@ cd jfrog-poc-samples/maven-sample
    ```
    Follow prompts to enter:
    - JFrog Platform URL: `https://<YOUR_DOMAIN>.jfrog.io`
-   - Username
-   - Encrypted Password (from Profile → Edit Profile → Generate Encrypted Password)
+   - username
+   - password or Reference Token (from Profile → Edit Profile → Generate an Identity Token)
 
 ### 5. Configure Maven
 ```shell
