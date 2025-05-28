@@ -35,7 +35,7 @@ This guide will help you get started with JFrog SaaS, set up your trial environm
 
 ## 🏗️ 3. Create Maven Repositories (Quick Repository Creation)
 
-![img_6.png](img_6.png)
+![img_6.png](images/img_6.png)
 1. Log in to your JFrog SaaS Platform.
 2. Click **Quick Repository Creation** (top-right).
 3. Select **Maven** as the package type.
@@ -123,26 +123,26 @@ jf rt bp sample-maven-build 1
 
 ### 9.1 Review the log4j Vulnerability
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 
 
 ### Review the JFrog advanced security result to reduce the false positives
-   ![img_5.png](img_5.png)
+   ![img_5.png](images/img_5.png)
 
 > **Great! JFrog advanced security found out 86% of critical/high vulnerabilities are false positives.**
 
 
-   ![img_4.png](img_4.png)
+   ![img_4.png](images/img_4.png)
 
 ---
 ### 9.2 Curation: Block log4j-2.14.0.jar
-![img_7.png](img_7.png)
+![img_7.png](images/img_7.png)
 1. **Create a condition to block `log4j-2.14.0.jar`:**  
    Administrator → Curation Settings → Create Condition  
-   ![img.png](img.png)
+   ![img.png](images/img.png)
 
 2. **Create a curation policy containing this condition:**  
-   ![img_2.png](img_2.png)
+   ![img_2.png](images/img_2.png)
 
 3. **Clean the local and remote repository cache:**
    ```bash
@@ -156,7 +156,7 @@ jf rt bp sample-maven-build 1
    [main] ERROR org.apache.maven.cli.MavenCli - Failed to execute goal on project app-boot: Could not resolve dependencies for project com.example.jfrog:app-boot:war:1.0.2: Could not transfer artifact org.apache.logging.log4j:log4j-core:jar:2.14.0 from/to artifactory-release (https://demo.jfrogchina.com/artifactory/alex-maven): authorization failed for https://demo.jfrogchina.com/artifactory/alex-maven/org/apache/logging/log4j/log4j-core/2.14.0/log4j-core-2.14.0.jar, status: 403 Forbidden -> [Help 1]
    ...
    ```
-   ![img_3.png](img_3.png)
+   ![img_3.png](images/img_3.png)
 
 5. **Upgrade the log4j version to 2.17 to fix the issue:**  
    Edit `pom.xml`:
