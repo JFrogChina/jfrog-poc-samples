@@ -136,6 +136,7 @@ Login to your JFrog SaaS instance:
 ✅ Navigate to Artifactory → Artifacts to see your deployed artifacts.
 ✅ Navigate to Builds to view the build information (sample-maven-build).
 
+
 🔒 8. Add sample-maven-local and Build to Xray Indexing
 To enable security scanning in Xray:
 
