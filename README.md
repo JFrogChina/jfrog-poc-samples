@@ -131,9 +131,10 @@ jf rt bp sample-maven-build 1
 
 > **Great! JFrog advanced security found out 86% of critical/high vulnerabilities are false positives.**
 
-![image-1.png](image-1.png)
----
 
+![image-1.png](image-1.png)
+
+---
 ### 9.2 Curation: Block log4j-2.14.0.jar
 
 1. **Create a condition to block `log4j-2.14.0.jar`:**  
