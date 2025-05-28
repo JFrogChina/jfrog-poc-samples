@@ -18,7 +18,8 @@ This guide will help you get started with JFrog SaaS, set up your trial environm
 2. After registering, you will receive access to your own JFrog Platform instance in the cloud.  
    Please ensure you have access to:
    - ✅ **JFrog Artifactory (SaaS)**
-   - ✅ **JFrog Xray** (Optional)
+   - ✅ **JFrog Xray** 
+   - ✅ **JFrog Advanced Security** 
 
 ---
 
@@ -124,6 +125,13 @@ jf rt bp sample-maven-build 1
 
 ![img_1.png](img_1.png)
 
+
+### Review the JFrog advanced security result to reduce the false positives
+   ![alt text](image.png)
+
+> **Great! JFrog advanced security found out 86% of critical/high vulnerabilities are false positives.**
+
+![alt text](image-1.png)
 ---
 
 ### 9.2 Curation: Block log4j-2.14.0.jar
