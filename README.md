@@ -127,11 +127,11 @@ jf rt bp sample-maven-build 1
 
 
 ### Review the JFrog advanced security result to reduce the false positives
-   ![alt text](image.png)
+   ![image.png](image.png)
 
 > **Great! JFrog advanced security found out 86% of critical/high vulnerabilities are false positives.**
 
-![alt text](image-1.png)
+![image-1.png](image-1.png)
 ---
 
 ### 9.2 Curation: Block log4j-2.14.0.jar
