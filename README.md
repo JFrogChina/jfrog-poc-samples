@@ -32,15 +32,10 @@ cd jfrog-poc-samples/maven-sample
 ```
 2️⃣ Review the project structure:
 
-maven-sample/
-├── pom.xml
-├── src/
-│   └── ...
-└── ...
 This is a simple Java Maven project for demonstration purposes.
 
 🏗️ 3. Create Maven Repositories Using Quick Repository Creation
-🔹 3.1 Use Quick Repository Creation (Recommended for New Users)
+3.1 Use Quick Repository Creation (Recommended for New Users)
 1️⃣ Log in to your JFrog SaaS Platform.
 2️⃣ In the top-right corner, click the Quick Repository Creation.
 3️⃣ Select Maven as the package type.
@@ -62,6 +57,7 @@ Remote Repo: sample-maven-remote
 
 Virtual Repo: sample-maven (used for builds and dependency resolution)
 
+
 🔗 4. Configure JFrog CLI
 We will use JFrog CLI to interact with the JFrog SaaS environment.
 
@@ -76,12 +72,14 @@ jf c add saas
 ```
 
 Follow the prompts:
-
+```shell
 JFrog Platform URL: https://<YOUR_DOMAIN>.jfrog.io
 
 Username: <your-username>
 
 Password: <your-encrypted-password> (not plain password, but the encrypted password generated in JFrog UI)
+
+```
 
 🔑 How to get your Encrypted Password
 Login to your JFrog SaaS UI.
