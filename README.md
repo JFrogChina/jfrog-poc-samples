@@ -1,4 +1,4 @@
-# 🏗️ JFrog SaaS Trial Workshop Guide - Basic Maven build and Xray scanning
+# 🏗️ JFrog SaaS Trial Workshop Guide 
 
 Welcome to the JFrog SaaS Trial Workshop! 🎓 This guide will help you get started with JFrog SaaS, set up your trial environment, and practice building a Maven project using our GitHub sample repository.
 
@@ -48,7 +48,7 @@ This is a simple Java Maven project for demonstration purposes.
 
 A Local Repository (e.g., sample-maven-local)
 
-A Remote Repository (e.g., sample-maven-remote, pointing to https://repo.maven.apache.org/maven2/)
+A Remote Repository (e.g., sample-maven-remote)
 
 A Virtual Repository (e.g., sample-maven, combining sample-maven-local and sample-maven-remote)
 
@@ -66,13 +66,15 @@ Virtual Repo: sample-maven (used for builds and dependency resolution)
 We will use JFrog CLI to interact with the JFrog SaaS environment.
 
 1️⃣ Download JFrog CLI:
-👉 JFrog CLI Download
+👉 JFrog CLI [Download](https://jfrog.com/getcli/)
 
 2️⃣ Configure your SaaS environment (replace <YOUR_DOMAIN> with your JFrog SaaS domain):
 
-bash
 
+```shell
 jf c add saas
+```
+
 Follow the prompts:
 
 JFrog Platform URL: https://<YOUR_DOMAIN>.jfrog.io
@@ -91,13 +93,14 @@ Copy the generated encrypted password and use it in the CLI configuration.
 🛠️ 5. Configure Maven with jf mvnc
 Run the following to configure Maven:
 
-
+```shell
 cd maven-sample
 jf mvnc
+```
+
 Follow the prompts:
 
-pgsql
-
+```shell
 Resolve dependencies from Artifactory? (y/n) [y]?
 Set Artifactory server ID [saas]: 
 Set resolution repository for release dependencies [sample-maven]: 
@@ -108,16 +111,19 @@ Set repository for release artifacts deployment [sample-maven-local]:
 Set repository for snapshot artifacts deployment [sample-maven-local]: 
 Would you like to filter out some of the deployed artifacts? (y/n) [n]? 
 Use Maven wrapper? (y/n) [y]? 
+```
+
 ✅ jf mvnc will automatically generate a settings.xml that points to your SaaS repositories.
 
 🏗️ 6. Build and Deploy the Maven Project
 Run the following commands to build and deploy the project to your SaaS instance:
 
-bash
+```shell
 
 jf mvn clean install -f pom.xml --build-name=sample-maven-build --build-number=1
 jf mvn deploy --build-name=sample-maven-build --build-number=1
 jf rt bp sample-maven-build 1
+```
 This will:
 
 Compile and package the project.
