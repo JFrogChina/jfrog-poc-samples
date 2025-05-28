@@ -127,7 +127,7 @@ jf rt bp sample-maven-build 1
 
 
 ### Review the JFrog advanced security result to reduce the false positives
-   ![image.png](image.png)
+   ![img_5.png](img_5.png)
 
 > **Great! JFrog advanced security found out 86% of critical/high vulnerabilities are false positives.**
 
