@@ -134,4 +134,8 @@ JFrog Advanced Security find out this log4j package is true positive and you can
    jf rt bp sample-maven-build 2
    ```
 The build should be successful and the issue was fixed.
+
+7. **Analysis of Vulnerability Fixing Trends:**
+Platform → Xray → Scan List → Builds
+![alt text](images/buildList.png)
 > **Happy building and stay secure! 🚀**
