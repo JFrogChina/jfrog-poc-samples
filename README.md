@@ -50,13 +50,13 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
    ```
 </details>
 
-### Maven 3.6+
+### Maven 3.6.3
 <details>
 <summary>Click to expand Maven installation steps</summary>
 
 1️⃣ **Download Maven**
-   - Go to [Apache Maven download page](https://maven.apache.org/download.cgi)
-   - Download the Binary zip archive (e.g., `apache-maven-3.9.6-bin.zip`)
+   - Go to [Apache Maven download page](https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip )
+   - Download the Binary zip archive (e.g., `apache-maven-3.6.3-bin.zip`)
 
 📂 2️⃣ **Extract Maven**
    - Extract the downloaded ZIP file to a directory, e.g.:
