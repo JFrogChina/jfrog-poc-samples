@@ -9,7 +9,7 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
 <summary> Click to expand Maven installation steps </summary>
 
 1. **Install JDK**
-   - Download and install JDK from [OpenJDK](https://adoptium.net/)
+   - Download and install JDK from [OpenJDK](https://jdk.java.net/archive/)
 
 2. **Configure Environment Variables**
    <details>
