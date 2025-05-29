@@ -4,7 +4,7 @@ Welcome to the **JFrog SaaS Trial Workshop!** 🎓
 This guide will help you get started with JFrog SaaS and practice building a Maven project.
 
 ## 📝 Prerequisites
-### JDK 1.8 Installation
+### JDK 17 Installation
 <details>
 <summary> Click to expand Maven installation steps </summary>
 
