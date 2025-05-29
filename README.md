@@ -64,7 +64,7 @@ jf rt bp sample-maven-build 1
 ### 8. Enable Xray Scanning
 1. Go to **JFrog Xray → Index Resource**
 2. Add to watch:
-   - Repositories: `sample-maven-local`
+   - Repositories: `sample-libs-snapshot-local` `sample-libs-release-local`
    - Builds: `sample-maven-build`
 
 ### Understanding log4j Vulnerability
