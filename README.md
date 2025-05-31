@@ -69,58 +69,46 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
      ```
 
 ⚙️ 3️⃣ **Set Environment Variables**
-   <details>
-   <summary>Click to expand environment variables configuration</summary>
 
-   ### Windows Environment Setup
-   
-   #### Method 1: Using System Properties
-   ```bash
-   # 1. Open System Properties
-   # Press Win + S and type "Environment Variables"
-   # Or right-click on This PC → Properties → Advanced system settings
-   
-   # 2. Click "Environment Variables" button
-   # 3. Under "System variables" section, click "New"
-   # 4. Set MAVEN_HOME:
-   Variable name:  MAVEN_HOME
-   Variable value: C:\Program Files\Apache\Maven\apache-maven-3.9.6
-   
-   # 5. Find "Path" variable, click "Edit"
-   # 6. Click "New" and add:
-   %MAVEN_HOME%\bin
-   # 7. Click "OK" on all windows to save
-   ```
+### Windows Environment Setup
 
-   #### Method 2: Using Command Line
-   ```bash
-   # Run Command Prompt as Administrator
-   
-   # Set MAVEN_HOME
-   setx MAVEN_HOME "C:\Program Files\Apache\Maven\apache-maven-3.9.6" /M
-   
-   # Add to PATH
-   setx PATH "%PATH%;%MAVEN_HOME%\bin" /M
-   ```
+#### Method 1: Using System Properties
+```bash
+# 1. Open System Properties
+# Press Win + S and type "Environment Variables"
+# Or right-click on This PC → Properties → Advanced system settings
 
-   ### Verify Installation
-   ```bash
-   # Open a new Command Prompt and run:
-   mvn -version
-   ```
-   
-   Expected output:
-   ```
-   Apache Maven 3.9.6 (...)
-   Maven home: C:\Program Files\Apache\Maven\apache-maven-3.9.6
-   Java version: 1.8.0_442, vendor: Oracle Corporation
-   Java home: C:\Program Files\Java\jdk1.8.0_442
-   Default locale: en_US, platform encoding: UTF-8
-   OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
-   ```
+# 2. Click "Environment Variables" button
+# 3. Under "System variables" section, click "New"
+# 4. Set MAVEN_HOME:
+Variable name:  MAVEN_HOME
+Variable value: C:\Program Files\Apache\Maven\apache-maven-3.9.6
 
-   > **Note:** After setting environment variables, you need to open a new Command Prompt for the changes to take effect.
-   </details>
+# 5. Find "Path" variable, click "Edit"
+# 6. Click "New" and add:
+%MAVEN_HOME%\bin
+# 7. Click "OK" on all windows to save
+```
+
+
+### Verify Installation
+```bash
+# Open a new Command Prompt and run:
+mvn -version
+```
+
+Expected output:
+```
+Apache Maven 3.9.6 (...)
+Maven home: C:\Program Files\Apache\Maven\apache-maven-3.9.6
+Java version: 1.8.0_442, vendor: Oracle Corporation
+Java home: C:\Program Files\Java\jdk1.8.0_442
+Default locale: en_US, platform encoding: UTF-8
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+```
+
+> **Note:** After setting environment variables, you need to open a new Command Prompt for the changes to take effect.
+</details>
 </details>
 
 ## 🚀 Getting Started
