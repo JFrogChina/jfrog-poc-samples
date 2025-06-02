@@ -235,6 +235,7 @@ The build should complete successfully, confirming that the security issue has b
 <details>
 <summary>繁體中文</summary>
 
+## 课程目标
 歡迎參加 **JFrog SaaS 試用工作坊！** 🎓  
 本工作坊旨在幫助您開始使用 JFrog SaaS 並練習構建 Maven 項目。在本次工作坊結束時，您將能夠：
 - 申請 JFrog SaaS 試用並設置您的環境。
