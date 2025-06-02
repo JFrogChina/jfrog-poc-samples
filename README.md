@@ -7,37 +7,35 @@ Welcome to the **JFrog SaaS Trial Workshop!** 🎓
 This guide will help you get started with JFrog SaaS and practice building a Maven project.
 
 ## 📝 Prerequisites
+
 ### JDK 17 Installation
 1. **Install JDK**
    - Download and install JDK from [OpenJDK](https://jdk.java.net/archive/)
 
-2. **Configure Environment Variables**
-   - **Set JAVA_HOME**
-     1. Open System Properties (Win + S → "Environment Variables")
-     2. Click "Environment Variables" → "New" under System variables
-     3. Set:
-        ```
-        Variable name: JAVA_HOME
-        Variable value: C:\Program Files\Java\jdk-17
-        ```
-   
-   - **Add Java to PATH**
-     1. In System variables, select "Path" → "Edit"
-     2. Click "New" and add:
-        ```
-        %JAVA_HOME%\bin
-        ```
-     3. Click "OK" to save
+### Set Environment Variables
 
-3. **Verify Installation**
+#### JAVA_HOME
+1. Open System Properties (Win + S → "Environment Variables")
+2. Click "Environment Variables" → "New" under System variables
+3. Set:
+   ```
+   Variable name: JAVA_HOME
+   Variable value: C:\Program Files\Java\jdk-17
+   ```
+4. In System variables, select "Path" → "Edit"
+5. Click "New" and add:
+   ```
+   %JAVA_HOME%\bin
+   ```
+6. Click "OK" to save
+
+### Verify Installation
    ```bash
    # Check Java version
    java -version
-   
    # Check Java compiler
    javac -version
    ```
-   
    Expected output:
    ```
    openjdk version "1.8.0_442-internal"
@@ -49,66 +47,59 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
 1️⃣ **Download Maven**
    - Go to [Apache Maven download page](https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip )
    - Download the Binary zip archive (e.g., `apache-maven-3.6.3-bin.zip`)
-
-📂 2️⃣ **Extract Maven**
+2️⃣ **Extract Maven**
    - Extract the downloaded ZIP file to a directory, e.g.:
      ```
      C:\Program Files\Apache\Maven
      ```
    - Your Maven folder structure should look like:
      ```
-     C:\Program Files\Apache\Maven\apache-maven-3.9.6
+     C:\Program Files\Apache\Maven\apache-maven-3.6.3
      ```
-
-⚙️ 3️⃣ **Set Environment Variables**
-
-### Windows Environment Setup
-
-#### Method 1: Using System Properties
-```bash
-# 1. Open System Properties
-# Press Win + S and type "Environment Variables"
-# Or right-click on This PC → Properties → Advanced system settings
-
-# 2. Click "Environment Variables" button
-# 3. Under "System variables" section, click "New"
-# 4. Set MAVEN_HOME:
-Variable name:  MAVEN_HOME
-Variable value: C:\Program Files\Apache\Maven\apache-maven-3.9.6
-
-# 5. Find "Path" variable, click "Edit"
-# 6. Click "New" and add:
-%MAVEN_HOME%\bin
-# 7. Click "OK" on all windows to save
-```
-
-### Verify Installation
-```bash
-# Open a new Command Prompt and run:
-mvn -version
-```
-
-Expected output:
-```
-Apache Maven 3.9.6 (...)
-Maven home: C:\Program Files\Apache\Maven\apache-maven-3.9.6
-Java version: 1.8.0_442, vendor: Oracle Corporation
-Java home: C:\Program Files\Java\jdk1.8.0_442
-Default locale: en_US, platform encoding: UTF-8
-OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
-```
+#### MAVEN_HOME Environment variables
+1. In System variables, click "New"
+2. Set:
+   ```
+   Variable name: MAVEN_HOME
+   Variable value: C:\Program Files\Apache\Maven\apache-maven-3.6.3
+   ```
+3. In "Path" variable, click "Edit"
+4. Click "New" and add:
+   ```
+   %MAVEN_HOME%\bin
+   ```
+5. Click "OK" on all windows to save
 
 > **Note:** After setting environment variables, you need to open a new Command Prompt for the changes to take effect.
+
+#### Verify Installation
+   ```bash
+   # Open a new Command Prompt and run:
+   mvn -version
+   ```
+   Expected output:
+   ```
+   Apache Maven 3.6.3 (...)
+   Maven home: C:\Program Files\Apache\Maven\apache-maven-3.6.3
+   Java version: 1.8.0_442, vendor: Oracle Corporation
+   Java home: C:\Program Files\Java\jdk1.8.0_442
+   Default locale: en_US, platform encoding: UTF-8
+   OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+   ```
 
 ## 🚀 Getting Started
 
 ### 1. Apply for JFrog SaaS Trial
 1. [Apply for JFrog SaaS Trial](https://jfrog.com/start-free/)  
-Select "14-Day Free Trial", it will give you own JFrog Platform.
-![alt text](images/trial.png)
-2. Ensure you have access to:
-   - ✅ **JFrog Artifactory (SaaS)**
-   - ✅ **JFrog Xray** 
+   Select "14-Day Free Trial", it will give you your own JFrog Platform.
+   ![alt text](images/trial.png)
+
+2. **Select AWS Region**
+   - Choose either AWS Singapore or Tokyo region
+   - This will provide better network performance for users in Asia
+   - The region selection is available during the trial signup process
+
+3. You will get an email containing the login credentials for the JFrog platform
 
 ### 2. Clone the Project
 ```bash
@@ -141,7 +132,7 @@ cd jfrog-poc-samples/maven-sample
 cd maven-sample
 jf mvnc
 ```
-This generates a `settings.xml` pointing to your SaaS repositories.
+This generates a `.jfrog/projects/maven.yaml` pointing to your SaaS repositories.
 
 ### 6. Build and Deploy
 ```shell
@@ -246,37 +237,35 @@ The build should complete successfully, confirming that the security issue has b
 本指南將幫助您開始使用 JFrog SaaS 並練習構建 Maven 項目。
 
 ## 📝 前置需求
+
 ### JDK 17 安裝
 1. **安裝 JDK**
    - 從 [OpenJDK](https://jdk.java.net/archive/) 下載並安裝 JDK
 
-2. **配置環境變數**
-   - **設置 JAVA_HOME**
-     1. 打開系統屬性（Win + S → "環境變數"）
-     2. 點擊"環境變數" → 在系統變數下點擊"新建"
-     3. 設置：
-        ```
-        變數名稱：JAVA_HOME
-        變數值：C:\Program Files\Java\jdk-17
-        ```
-   
-   - **添加 Java 到 PATH**
-     1. 在系統變數中，選擇"Path" → "編輯"
-     2. 點擊"新建"並添加：
-        ```
-        %JAVA_HOME%\bin
-        ```
-     3. 點擊"確定"保存
+### 設置環境變數
 
-3. **驗證安裝**
+#### JAVA_HOME
+1. 打開系統屬性（Win + S → "環境變數"）
+2. 點擊"環境變數" → 在系統變數下點擊"新建"
+3. 設置：
+   ```
+   變數名稱：JAVA_HOME
+   變數值：C:\Program Files\Java\jdk-17
+   ```
+4. 在系統變數中，選擇"Path" → "編輯"
+5. 點擊"新建"並添加：
+   ```
+   %JAVA_HOME%\bin
+   ```
+6. 點擊"確定"保存
+
+### 驗證安裝
    ```bash
    # 檢查 Java 版本
    java -version
-   
    # 檢查 Java 編譯器
    javac -version
    ```
-   
    預期輸出：
    ```
    openjdk version "1.8.0_442-internal"
@@ -288,66 +277,59 @@ The build should complete successfully, confirming that the security issue has b
 1️⃣ **下載 Maven**
    - 訪問 [Apache Maven 下載頁面](https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip )
    - 下載二進制 zip 檔案（例如：`apache-maven-3.6.3-bin.zip`）
-
-📂 2️⃣ **解壓 Maven**
+2️⃣ **解壓 Maven**
    - 將下載的 ZIP 檔案解壓到目錄，例如：
      ```
      C:\Program Files\Apache\Maven
      ```
    - 您的 Maven 資料夾結構應該如下：
      ```
-     C:\Program Files\Apache\Maven\apache-maven-3.9.6
+     C:\Program Files\Apache\Maven\apache-maven-3.6.3
      ```
-
-⚙️ 3️⃣ **設置環境變數**
-
-### Windows 環境設置
-
-#### 方法 1：使用系統屬性
-```bash
-# 1. 打開系統屬性
-# 按 Win + S 並輸入"環境變數"
-# 或右鍵點擊此電腦 → 屬性 → 進階系統設定
-
-# 2. 點擊"環境變數"按鈕
-# 3. 在"系統變數"部分，點擊"新建"
-# 4. 設置 MAVEN_HOME：
-變數名稱：MAVEN_HOME
-變數值：C:\Program Files\Apache\Maven\apache-maven-3.9.6
-
-# 5. 找到"Path"變數，點擊"編輯"
-# 6. 點擊"新建"並添加：
-%MAVEN_HOME%\bin
-# 7. 點擊所有視窗的"確定"保存
-```
-
-### 驗證安裝
-```bash
-# 打開新的命令提示字元並運行：
-mvn -version
-```
-
-預期輸出：
-```
-Apache Maven 3.9.6 (...)
-Maven home: C:\Program Files\Apache\Maven\apache-maven-3.9.6
-Java version: 1.8.0_442, vendor: Oracle Corporation
-Java home: C:\Program Files\Java\jdk1.8.0_442
-Default locale: en_US, platform encoding: UTF-8
-OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
-```
+#### MAVEN_HOME 環境變數
+1. 在系統變數中，點擊"新建"
+2. 設置：
+   ```
+   變數名稱：MAVEN_HOME
+   變數值：C:\Program Files\Apache\Maven\apache-maven-3.6.3
+   ```
+3. 在"Path"變數，點擊"編輯"
+4. 點擊"新建"並添加：
+   ```
+   %MAVEN_HOME%\bin
+   ```
+5. 點擊所有視窗的"確定"保存
 
 > **注意：** 設置環境變數後，您需要打開新的命令提示字元才能使更改生效。
+
+#### 驗證安裝
+   ```bash
+   # 打開新的命令提示字元並運行：
+   mvn -version
+   ```
+   預期輸出：
+   ```
+   Apache Maven 3.6.3 (...)
+   Maven home: C:\Program Files\Apache\Maven\apache-maven-3.6.3
+   Java version: 1.8.0_442, vendor: Oracle Corporation
+   Java home: C:\Program Files\Java\jdk1.8.0_442
+   Default locale: en_US, platform encoding: UTF-8
+   OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+   ```
 
 ## 🚀 開始使用
 
 ### 1. 申請 JFrog SaaS 試用
 1. [申請 JFrog SaaS 試用](https://jfrog.com/start-free/)  
-選擇"14 天免費試用"，它將為您提供自己的 JFrog 平台。
-![alt text](images/trial.png)
-2. 確保您有權限訪問：
-   - ✅ **JFrog Artifactory (SaaS)**
-   - ✅ **JFrog Xray** 
+   選擇"14 天免費試用"，它將為您提供自己的 JFrog 平台。
+   ![alt text](images/trial.png)
+
+2. **選擇 AWS 區域**
+   - 選擇 AWS 新加坡或東京區域
+   - 這將為亞洲用戶提供更好的網絡性能
+   - 區域選擇在試用註冊過程中可用
+
+3. 您將收到一封包含 JFrog 平台登入憑證的電子郵件
 
 ### 2. 克隆項目
 ```bash
@@ -380,7 +362,7 @@ cd jfrog-poc-samples/maven-sample
 cd maven-sample
 jf mvnc
 ```
-這將生成指向您的 SaaS 倉庫的 `settings.xml`。
+這將生成指向您的 SaaS 倉庫的 `.jfrog/projects/maven.yaml`。
 
 ### 6. 構建和部署
 ```shell
