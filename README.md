@@ -1,10 +1,14 @@
-# 🏗️ JFrog SaaS Trial Workshop Guide
-
 <details>
 <summary>English</summary>
 
+## Course Objectives
+
 Welcome to the **JFrog SaaS Trial Workshop!** 🎓  
-This guide will help you get started with JFrog SaaS and practice building a Maven project.
+This workshop aims to help you get started with JFrog SaaS and practice building a Maven project. By the end of this workshop, you will be able to:
+- Apply for a JFrog SaaS trial and set up your environment.
+- Clone and configure a Maven project.
+- Build and deploy the project using JFrog CLI.
+- Understand and remediate security vulnerabilities using JFrog Xray.
 
 ## 📝 Prerequisites
 
@@ -36,9 +40,9 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
    ```
    Expected output:
    ```
-   openjdk version "1.8.0_442-internal"
-   OpenJDK Runtime Environment (build 1.8.0_442-internal-b06)
-   OpenJDK 64-Bit Server VM (build 25.442-b06, mixed mode)
+   openjdk version "17.0.2" 2022-01-18
+   OpenJDK Runtime Environment (build 17.0.2+8)
+   OpenJDK 64-Bit Server VM (build 17.0.2+8, mixed mode, sharing)
    ```
 
 ### Maven 3.6.3
@@ -79,7 +83,7 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
    ```
    Apache Maven 3.6.3 (...)
    Maven home: C:\Program Files\Apache\Maven\apache-maven-3.6.3
-Java version: 17.0.2, vendor: Oracle Corporation
+   Java version: 17.0.2, vendor: Oracle Corporation
    Java home: C:\Program Files\Java\jdk-17
    Default locale: en_US, platform encoding: UTF-8
    OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
@@ -232,7 +236,11 @@ The build should complete successfully, confirming that the security issue has b
 <summary>繁體中文</summary>
 
 歡迎參加 **JFrog SaaS 試用工作坊！** 🎓  
-本指南將幫助您開始使用 JFrog SaaS 並練習構建 Maven 項目。
+本工作坊旨在幫助您開始使用 JFrog SaaS 並練習構建 Maven 項目。在本次工作坊結束時，您將能夠：
+- 申請 JFrog SaaS 試用並設置您的環境。
+- 克隆並配置 Maven 項目。
+- 使用 JFrog CLI 構建和部署項目。
+- 使用 JFrog Xray 理解和修復安全漏洞。
 
 ## 📝 前置需求
 
@@ -264,9 +272,9 @@ The build should complete successfully, confirming that the security issue has b
    ```
    預期輸出：
    ```
-openjdk version "17.0.2" 2022-01-18
-OpenJDK Runtime Environment (build 17.0.2+8)
-OpenJDK 64-Bit Server VM (build 17.0.2+8, mixed mode, sharing)
+   openjdk version "17.0.2" 2022-01-18
+   OpenJDK Runtime Environment (build 17.0.2+8)
+   OpenJDK 64-Bit Server VM (build 17.0.2+8, mixed mode, sharing)
    ```
 
 ### Maven 3.6.3
@@ -298,12 +306,12 @@ OpenJDK 64-Bit Server VM (build 17.0.2+8, mixed mode, sharing)
 
 > **注意：** 設置環境變數後，您需要打開新的命令提示字元才能使更改生效。
 
-#### Verify Installation
+#### 驗證安裝
    ```bash
-   # Open a new Command Prompt and run:
+   # 打開新的命令提示字元並運行：
    mvn -version
    ```
-   Expected output:
+   預期輸出：
    ```
    Apache Maven 3.6.3 (...)
    Maven home: C:\Program Files\Apache\Maven\apache-maven-3.6.3
