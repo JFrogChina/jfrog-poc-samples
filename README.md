@@ -33,8 +33,6 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
    ```bash
    # Check Java version
    java -version
-   # Check Java compiler
-   javac -version
    ```
    Expected output:
    ```
@@ -81,7 +79,7 @@ This guide will help you get started with JFrog SaaS and practice building a Mav
    ```
    Apache Maven 3.6.3 (...)
    Maven home: C:\Program Files\Apache\Maven\apache-maven-3.6.3
-   Java version: 1.8.0_442, vendor: Oracle Corporation
+Java version: 17.0.2, vendor: Oracle Corporation
    Java home: C:\Program Files\Java\jdk-17
    Default locale: en_US, platform encoding: UTF-8
    OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
@@ -263,14 +261,12 @@ The build should complete successfully, confirming that the security issue has b
    ```bash
    # 檢查 Java 版本
    java -version
-   # 檢查 Java 編譯器
-   javac -version
    ```
    預期輸出：
    ```
-   openjdk version "1.8.0_442-internal"
-   OpenJDK Runtime Environment (build 1.8.0_442-internal-b06)
-   OpenJDK 64-Bit Server VM (build 25.442-b06, mixed mode)
+openjdk version "17.0.2" 2022-01-18
+OpenJDK Runtime Environment (build 17.0.2+8)
+OpenJDK 64-Bit Server VM (build 17.0.2+8, mixed mode, sharing)
    ```
 
 ### Maven 3.6.3
@@ -302,16 +298,16 @@ The build should complete successfully, confirming that the security issue has b
 
 > **注意：** 設置環境變數後，您需要打開新的命令提示字元才能使更改生效。
 
-#### 驗證安裝
+#### Verify Installation
    ```bash
-   # 打開新的命令提示字元並運行：
+   # Open a new Command Prompt and run:
    mvn -version
    ```
-   預期輸出：
+   Expected output:
    ```
    Apache Maven 3.6.3 (...)
    Maven home: C:\Program Files\Apache\Maven\apache-maven-3.6.3
-   Java version: 1.8.0_442, vendor: Oracle Corporation
+   Java version: 17.0.2, vendor: Oracle Corporation
    Java home: C:\Program Files\Java\jdk-17
    Default locale: en_US, platform encoding: UTF-8
    OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
