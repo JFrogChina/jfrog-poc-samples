@@ -126,7 +126,18 @@ cd jfrog-poc-samples/maven-sample
    - Remote Repo: `sample-maven-remote`
    - Virtual Repo: `sample-libs-snapshot` `sample-libs-release`
 
-### 4. Configure JFrog CLI
+### 4. Enable Xray Scanning
+1. Go to **Administrator -> Xray Settings → Index Resource**
+2. Add to indexed Repository:
+   - Repositories: `sample-libs-snapshot-local` `sample-libs-release-local`
+3. Configure Index Build by Pattern:
+   - Click Manage builds -> By Pattern
+   - Input the rule as below: `**/*`
+   - Click the + button
+   - This will scan all builds in the system
+     ![img_8.png](images/img_8.png)
+
+### 5. Configure JFrog CLI
 1. [Download JFrog CLI](https://jfrog.com/getcli/)
 2. Configure your environment:
    ```shell
@@ -137,29 +148,23 @@ cd jfrog-poc-samples/maven-sample
    - username
    - password or Reference Token (from Profile → Edit Profile → Generate an Identity Token)
 
-### 5. Configure Maven
+### 6. Configure Maven
 ```shell
 cd maven-sample
 jf mvnc
 ```
 This generates a `.jfrog/projects/maven.yaml` pointing to your SaaS repositories.
 
-### 6. Build and Deploy
+### 7. Build and Deploy
 ```shell
 jf mvn clean install -f pom.xml --build-name=sample-maven-build --build-number=1
 jf mvn deploy --build-name=sample-maven-build --build-number=1
 jf rt bp sample-maven-build 1
 ```
 
-### 7. Verify Deployment
+### 8. Verify Deployment
 - Check **Artifactory → Artifacts** for deployed files
 - View build info in **Builds** section
-
-### 8. Enable Xray Scanning
-1. Go to **JFrog Xray → Index Resource**
-2. Add to watch:
-   - Repositories: `sample-libs-snapshot-local` `sample-libs-release-local`
-   - Builds: `sample-maven-build`
 
 ### Understanding log4j Vulnerability
 The log4j vulnerability (CVE-2021-44228) is detected because your project uses log4j-core 2.14.0. However, it's only exploitable when:
@@ -367,7 +372,17 @@ cd jfrog-poc-samples/maven-sample
    - 遠程倉庫：`sample-maven-remote`
    - 虛擬倉庫：`sample-libs-snapshot` `sample-libs-release`
 
-### 4. 配置 JFrog CLI
+### 4. 啟用 Xray 掃描
+1. 轉到 **管理員 -> Xray 設置 → 索引資源**
+2. 添加到索引倉庫：
+   - 倉庫：`sample-libs-snapshot-local` `sample-libs-release-local`
+3. 配置構建索引模式：
+   - 點擊 Manage builds -> By Pattern
+   - 輸入規則如下：`**/*`
+   - 點擊 + 按鈕
+   - 這將掃描系統中的所有構建
+     ![img_8.png](images/img_8.png)
+### 5. Configure JFrog CLI
 1. [下載 JFrog CLI](https://jfrog.com/getcli/)
 2. 配置您的環境：
    ```shell
@@ -378,31 +393,25 @@ cd jfrog-poc-samples/maven-sample
    - 用戶名
    - 密碼或參考令牌（從個人資料 → 編輯個人資料 → 生成身份令牌）
 
-### 5. 配置 Maven
+### 6. Configure Maven
 ```shell
 cd maven-sample
 jf mvnc
 ```
 這將生成指向您的 SaaS 倉庫的 `.jfrog/projects/maven.yaml`。
 
-### 6. 構建和部署
+### 7. Build and Deploy
 ```shell
 jf mvn clean install -f pom.xml --build-name=sample-maven-build --build-number=1
 jf mvn deploy --build-name=sample-maven-build --build-number=1
 jf rt bp sample-maven-build 1
 ```
 
-### 7. 驗證部署
+### 8. Verify Deployment
 - 在 **Artifactory → Artifacts** 中檢查已部署的文件
 - 在 **Builds** 部分查看構建信息
 
-### 8. 啟用 Xray 掃描
-1. 轉到 **JFrog Xray → Index Resource**
-2. 添加到監視：
-   - 倉庫：`sample-libs-snapshot-local` `sample-libs-release-local`
-   - 構建：`sample-maven-build`
-
-### 了解 log4j 漏洞
+### Understanding log4j Vulnerability
 檢測到 log4j 漏洞（CVE-2021-44228）是因為您的項目使用了 log4j-core 2.14.0。但是，只有在以下情況下才會被利用：
 
 1. 使用易受攻擊的日誌模式：
