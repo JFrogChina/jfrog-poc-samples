@@ -15,6 +15,7 @@
 .springBeans
 .sts4-cache
 *.tgz
+.gradle/
 ### IntelliJ IDEA ###
 .idea
 *.iws
