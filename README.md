@@ -143,10 +143,16 @@ cd jfrog-poc-samples/maven-sample
    ```shell
    jf c add saas
    ```
+   This command will:
+   - Add a new JFrog configuration named 'saas'
+   - Prompt you to enter your JFrog platform details
+   - Store your credentials securely
+   - Set up the connection to your JFrog SaaS instance
+
    Follow prompts to enter:
    - JFrog Platform URL: `https://<YOUR_DOMAIN>.jfrog.io`
    - username
-   - password or Reference Token (from Profile → Edit Profile → Generate an Identity Token)
+   - password
 
 ### 6. Configure Maven
 ```shell
@@ -382,16 +388,23 @@ cd jfrog-poc-samples/maven-sample
    - 點擊 + 按鈕
    - 這將掃描系統中的所有構建
      ![img_8.png](images/img_8.png)
+
 ### 5. Configure JFrog CLI
 1. [下載 JFrog CLI](https://jfrog.com/getcli/)
 2. 配置您的環境：
    ```shell
    jf c add saas
    ```
+   此命令將：
+   - 添加一個名為 'saas' 的新 JFrog 配置
+   - 提示您輸入 JFrog 平台詳細信息
+   - 安全存儲您的憑證
+   - 設置與您的 JFrog SaaS 實例的連接
+
    按照提示輸入：
    - JFrog 平台 URL：`https://<YOUR_DOMAIN>.jfrog.io`
    - 用戶名
-   - 密碼或參考令牌（從個人資料 → 編輯個人資料 → 生成身份令牌）
+   - 密碼
 
 ### 6. Configure Maven
 ```shell
