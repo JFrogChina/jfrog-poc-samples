@@ -17,14 +17,12 @@ This workshop aims to help you get started with JFrog SaaS and practice building
    - Download and install JDK from [OpenJDK](https://jdk.java.net/archive/)
    - Select JDK 17 (LTS) version
    - Choose the appropriate package for your operating system:
-     - Windows: `.msi` installer or `.zip` archive
-     - macOS: `.pkg` installer or `.tar.gz` archive
+     - Windows: `.zip` archive
+     - macOS: `.tar.gz` archive
    - For Windows:
-     - Run the `.msi` installer and follow the installation wizard
-     - Or extract the `.zip` to a directory like `C:\Program Files\Java\jdk-17`
+     - Extract the `.zip` to a directory like `C:\Program Files\Java\jdk-17`
    - For macOS:
-     - Run the `.pkg` installer and follow the installation wizard
-     - Or extract the `.tar.gz` to `/Library/Java/JavaVirtualMachines/`
+     - Extract the `.tar.gz` to `/Library/Java/JavaVirtualMachines/`
 
 ### Set Environment Variables
 
@@ -260,14 +258,12 @@ The build should complete successfully, confirming that the security issue has b
    - 從 [OpenJDK](https://jdk.java.net/archive/) 下載並安裝 JDK
    - 選擇 JDK 17 (LTS) 版本
    - 選擇適合您作業系統的套件：
-     - Windows：`.msi` 安裝程式或 `.zip` 壓縮檔
-     - macOS：`.pkg` 安裝程式或 `.tar.gz` 壓縮檔
+     - Windows：`.zip` 壓縮檔
+     - macOS：`.tar.gz` 壓縮檔
    - Windows 系統：
-     - 執行 `.msi` 安裝程式並按照安裝精靈操作
-     - 或解壓 `.zip` 到目錄，如 `C:\Program Files\Java\jdk-17`
+     - 解壓 `.zip` 到目錄，如 `C:\Program Files\Java\jdk-17`
    - macOS 系統：
-     - 執行 `.pkg` 安裝程式並按照安裝精靈操作
-     - 或解壓 `.tar.gz` 到 `/Library/Java/JavaVirtualMachines/`
+     - 解壓 `.tar.gz` 到 `/Library/Java/JavaVirtualMachines/`
 
 ### Set Environment Variables
 
