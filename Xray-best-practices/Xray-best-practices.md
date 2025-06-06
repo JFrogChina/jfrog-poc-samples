@@ -22,18 +22,18 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 ## 👥 User Groups and Permissions
 
 ### 🔧 Create User Groups
+![](2025-06-06-14-52-57.png)
 
 
-
-#### Group: `tfs-dev`
+#### Group: `app-dev`
 
 * Role: Developer
 * Permissions:
 
-  * Deploy, Read, Annotate, Delete on selected repos (e.g., `tfs-dev-local`)
+  * Deploy, Read, Annotate, Delete on selected repos (e.g., `app-dev-local`)
   * No access to Xray metadata configuration
 
-#### Group: `tfs-security`
+#### Group: `app-security`
 
 * Role: Security Engineer
 * Permissions:
@@ -45,30 +45,30 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 ### 🔐 Add Users to Groups
 
 1. Go to **Identity & Access > Users**
-2. Edit user `tfs-dev`, assign group `tfs-dev`
-3. Edit user `tfs-security`, assign group `tfs-security`
+2. Edit user `app-dev`, assign group `app-dev`
+3. Edit user `app-security`, assign group `app-security`
 
 ---
 
 ## 📁 Repository and Permission Setup
 
 ### 🔐 Create Permission Target
-
-1. Go to **Identity & Access > Permissions**
-2. Create new target: `tfs-dev-permission`
-3. Attach `tfs-dev-local` repository
+![](2025-06-06-14-54-28.png)
+1. Go to **administration & User Management > Permissions**
+2. Create new target: `app-dev-permission`
+3. Attach `app-dev-local` repository
 4. Set group permissions:
 
 | Group          | Read | Deploy | Delete | Annotate | Manage Xray Metadata |
 | -------------- | ---- | ------ | ------ | -------- | -------------------- |
-| `tfs-dev`      | ✔️   | ✔️     | ✔️     | ✔️       | ❌                    |
-| `tfs-security` | ✔️   | ❌      | ❌      | ❌        | ✔️                   |
+| `app-dev`      | ✔️   | ✔️     | ✔️     | ✔️       | ❌                    |
+| `app-security` | ✔️   | ❌      | ❌      | ❌        | ✔️                   |
 
 
 ---
 
-## 📦 Component Indexing and Scan Configuration
-
+## 📦 Indexing Repository and Builds
+![](2025-06-06-14-56-31.png)
 ### Resource Types
 
 | Resource Type | Description |
@@ -77,10 +77,8 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 | Builds | Indexes CI/CD-generated builds, including all dependencies. |
 | Release Bundles | Indexes software packaged for distribution. |
 
-* Enable Xray indexing on key repositories like `tfs-dev-local`, `maven-local`, `docker-prod`.
+* Enable Xray indexing on key repositories like `app-dev-local`, `maven-local`, `docker-prod`.
 * Avoid indexing temp/cached repositories like `*-cache`.
-* Configure indexing filters to include only security-relevant files (`.jar`, `.tgz`, `.whl`, `.tar.gz`).
-* Prefer build-based scan over per-file scan to optimize performance.
 
 ---
 
@@ -98,7 +96,7 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
    * Security: CVE severity ≥ High or CVSS ≥ 9.0
    * License: Not in whitelist
    * Operational: Unscannable component
-4. Set actions: Fail Build, Notify, Webhook
+4. Set actions: Fail Build, Block
 
 ### 📖 Policy Naming Convention
 
@@ -107,17 +105,17 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 ```
 
 ### 🔍 Creating Watches
-
+![](2025-06-06-15-12-29.png)
 1. Navigate to **Platform -> Xray -> Watches**
 2. Click **Create Watch**, set name and scope (repositories, builds, or bundles)
 3. Attach previously created policies
-4. Configure optional notifications (email/webhook/Slack)
+
 
 ### 📊 Policy + Watch Examples
 
 | Use Case             | Target        | Rules                    | Action      |
 | -------------------- | ------------- | ------------------------ | ----------- |
-| Production security  | `tfs-dev-local` | CVSS Score = 10               | Block download  |
+| Production security  | `app-dev-local` | CVSS Score = 10               | Block download  |
 | CI License blocking  | `Build: ci-*` | License not in whitelist | Fail Build  |
 | Audit-only licensing | All repos     | License is GPL           | Notify only |
 
@@ -125,10 +123,13 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ## 🚀 CI/CD Integration
 
+* 创建 Maven build
+参考 [Maven Build Sample](https://github.com/JFrogChina/jfrog-poc-samples/tree/main/maven-sample)
+
 * Use **JFrog CLI** to trigger build scans:
 
 ```bash
- jf bs sample-maven-build 10 --rescan=true 
+ jf bs sample-maven-build 1 --rescan=true 
 ```
 * Pipeline steps:
 
@@ -145,12 +146,6 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 * Use **Contextual Analysis** to reduce false positives.
 * Enable "Reachable Vulnerabilities" for advanced CVE tracing.
 
----
-
-## ⚙️ Performance Optimization
-
-* Exclude irrelevant file types from indexing (`.md`, `.txt`, `.log`).
-* Regularly clean up old scan results and build info.
 
 ---
 
@@ -165,13 +160,8 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ## 📃 References
 
-* [JFrog Xray Documentation](https://docs.jfrog.com/xray/)
-* [Xray REST API](https://jfrog.com/help/r/xray-rest-apis/)
-* [Build Integration with Xray](https://jfrog.com/help/r/xray-documentation/build-integration)
-* [Create Policies and Watches](https://jfrog.com/help/r/jfrog-platform-administration-documentation/create-xray-policies-and-watches)
-* [Manage Permissions](https://jfrog.com/help/r/jfrog-platform-administration-documentation/permission-targets)
+* [JFrog Xray Documentation](https://jfrog.com/help/r/jfrog-security-user-guide/products/xray)
 
 ---
 
-> 📌 Tip: Align Xray governance with internal security frameworks (e.g., ISO 27001, SLSA, SBOM strategy) to build a resilient supply chain.
 
