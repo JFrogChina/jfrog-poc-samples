@@ -142,9 +142,8 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ## ⚡ Risk Management
 
-* Log all unscannable components for investigation.
 * Use **Contextual Analysis** to reduce false positives.
-* Enable "Reachable Vulnerabilities" for advanced CVE tracing.
+
 
 
 ---
