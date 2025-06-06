@@ -6,7 +6,7 @@
     <groupId>com.example.jfrog</groupId>
     <artifactId>app-boot</artifactId>
     <version>1.0.3</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>app-boot</name>
     <description>Demo project for JFrog</description>
     <properties>
@@ -51,6 +51,15 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>
