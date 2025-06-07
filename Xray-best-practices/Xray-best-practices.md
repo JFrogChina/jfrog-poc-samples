@@ -116,7 +116,7 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ### 📊 Policy + Watch Examples
 
-| Use Case             | Target        | Rules                    | Action      |
+| Use Case             | Target Resources       | Rules                    | Action      |
 | -------------------- | ------------- | ------------------------ | ----------- |
 | Production security  | `app-dev-local` | CVSS Score = 10               | Block download  |
 | CI License blocking  | `Build: ci-*` | License not in whitelist | Fail Build  |
