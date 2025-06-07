@@ -2,20 +2,35 @@
 
 This document outlines best practices for using **JFrog Xray** to ensure software supply chain security. It includes configuration recommendations, CI/CD integration, policy/watch setup, role-based access control, and more.
 
+### Resource Types
+
+| Resource Type | Description |
+|--------------|-------------|
+| Repositories | Indexes artifacts stored in JFrog Artifactory repositories. |
+| Builds | Indexes CI/CD-generated builds, including all dependencies. |
+| Release Bundles | Indexes software packaged for distribution. |
+
 ---
 
 ## 🔍 Table of Contents
 
 1. [User Groups and Permissions](#user-groups-and-permissions)
-2. [Environment Preparation](#environment-preparation)
-3. [Component Indexing and Scan Configuration](#component-indexing-and-scan-configuration)
-4. [Policies and Watches](#policies-and-watches)
-5. [CI/CD Integration](#cicd-integration)
-6. [Risk Management](#risk-management)
-7. [Performance Optimization](#performance-optimization)
-8. [Compliance and Licensing](#compliance-and-licensing)
-9. [Monitoring and Auditing](#monitoring-and-auditing)
-10. [References](#references)
+2. [Repository and Permission Setup](#-repository-and-permission-setup)
+3. [Environment Preparation](#-environment-preparation)
+4. [Component Indexing and Scan Configuration](#-component-indexing-and-scan-configuration)
+5. [Policies and Watches](#-policies-and-watches)
+6. [CI/CD Integration](#-cicd-integration)
+7. [JFrog Advanced Security](#-jfrog-advanced-security)
+   - [Applicable vs. Non-Applicable Vulnerabilities](#-applicable-vs-non-applicable-vulnerabilities)
+   - [Secrets Detection](#-secrets-detection)
+8. [Curation](#-curation)
+   - [Key Use Cases](#-key-use-cases)
+   - [How Curation Works](#️-how-curation-works)
+   - [How to Configure Curation](#️-how-to-configure-curation)
+   - [Curation Rule Example Scenarios](#-curation-rule-example-scenarios)
+   - [Testing & Validation](#-testing--validation)
+   - [Best Practices](#-best-practices)
+9. [References](#-references)
 
 ---
 
@@ -66,14 +81,6 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ## 📦 Indexing Repository and Builds
 ![](2025-06-06-14-56-31.png)
-
-### Resource Types
-
-| Resource Type | Description |
-|--------------|-------------|
-| Repositories | Indexes artifacts stored in JFrog Artifactory repositories. |
-| Builds | Indexes CI/CD-generated builds, including all dependencies. |
-| Release Bundles | Indexes software packaged for distribution. |
 
 * Enable Xray indexing on key repositories like `app-dev-local`, `maven-local`, `docker-prod`.
 * Avoid indexing temp/cached repositories like `*-cache`.
@@ -137,10 +144,8 @@ jf bs sample-maven-build 1 --rescan=true
 
 ---
 
-
 ## 🔒 JFrog Advanced Security
 * Use **Contextual Analysis** to reduce false positives.
-
 
 ### Contextual Analysis
 
@@ -152,7 +157,7 @@ jf bs sample-maven-build 1 --rescan=true
 
 **JFrog Advanced Security** introduces **applicability analysis** — a powerful feature that helps security teams focus only on vulnerabilities that pose a **real, contextual threat** to your code.
 
-#### 🔎 What Does “Applicable” Mean?
+#### 🔎 What Does "Applicable" Mean?
 
 A vulnerability is considered **applicable** if:
 
@@ -162,7 +167,7 @@ A vulnerability is considered **applicable** if:
 
 #### 🚫 Non-Applicable = No Immediate Risk
 
-If a CVE exists in a library, but your application **doesn’t use or reach the vulnerable code**, Xray will mark it as **non-applicable**. This helps eliminate **false positives** and prioritize fixes based on actual risk.
+If a CVE exists in a library, but your application **doesn't use or reach the vulnerable code**, Xray will mark it as **non-applicable**. This helps eliminate **false positives** and prioritize fixes based on actual risk.
 
 #### ✅ Benefits of Applicability Analysis
 
@@ -217,21 +222,15 @@ Use this feature to **focus remediation**, reduce noise, and strengthen your **D
 - Enforce **package version** or **type restrictions**  
 - Maintain a **controlled and approved component baseline**
 
----
-
 ### ⚙️ How Curation Works
 
 Curation is enforced **at the download stage** (e.g., when developers fetch dependencies via `npm`, `pip`, `maven`, etc.). It checks all requests from **remote repositories** against defined **rules**.
 
 If a request violates a rule, the download is blocked **before the artifact reaches the developer or build agent.**
 
----
-
 ### 🛠️ How to Configure Curation 
 
 https://jfrog.com/help/r/jfrog-security-user-guide/products/curation/configure-curation
-
----
 
 ### 📈 Curation Rule Example Scenarios
 
@@ -242,8 +241,6 @@ https://jfrog.com/help/r/jfrog-security-user-guide/products/curation/configure-c
 | `block-unscannable`        | Component cannot be scanned              | All remotes            | Block Download |
 | `disallow-legacy-packages` | Version < 1.0.0                          | `pypi-remote`          | Block Download |
 
----
-
 ### 🧪 Testing & Validation
 
 Before applying to production:
@@ -253,8 +250,6 @@ Before applying to production:
 3. Confirm that requests are blocked with proper error messages  
 4. Review audit logs under `JFrog Platform > Curation > audit`
 
----
-
 ### 📋 Best Practices
 
 - ✅ Start with **critical CVEs** (CVSS ≥ 9.0) to minimize disruption  
@@ -262,8 +257,6 @@ Before applying to production:
 - ✅ Document all exceptions with justification and approver info  
 - ✅ Review rules **quarterly** or during security events  
 - ✅ Educate development teams on why and how curation is enforced
-
----
 
 ### 📌 Summary
 
@@ -273,7 +266,6 @@ Before applying to production:
 | License Filtering    | Ensure legal and compliance safety       |
 | Download Interception| Prevent risky components from entering   |
 | Policy Governance    | Maintain traceable, auditable rules      |
-
 
 ## 📃 References
 
