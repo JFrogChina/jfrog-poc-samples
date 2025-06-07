@@ -137,13 +137,10 @@ jf bs sample-maven-build 1 --rescan=true
 
 ---
 
-## ⚡ Risk Management
-
-* Use **Contextual Analysis** to reduce false positives.
-
----
 
 ## 🔒 JFrog Advanced Security
+* Use **Contextual Analysis** to reduce false positives.
+
 
 ### Contextual Analysis
 
@@ -174,7 +171,6 @@ If a CVE exists in a library, but your application **doesn’t use or reach the 
 | 🎯 Reduces Noise         | Focus only on vulnerabilities that matter         |
 | 🧠 Smarter Remediation   | Fix vulnerabilities with real execution paths     |
 | 📉 Fewer False Positives | Saves time and avoids unnecessary rebuilds        |
-| 📊 Enhanced Risk Visibility | Gives teams confidence in risk-based prioritization |
 
 #### 🔬 Technical Context
 
@@ -208,12 +204,6 @@ Use this feature to **focus remediation**, reduce noise, and strengthen your **D
 * Scans for exposed secrets and credentials  
 * Supports multiple secret types (API keys, passwords, tokens)  
 * Integrates with CI/CD pipelines
-
-### IaC Security
-
-* Scans Infrastructure as Code (Terraform, Kubernetes, etc.)  
-* Identifies misconfigurations and security risks  
-* Provides remediation recommendations
 
 ---
 ## 🛡️ Curation
