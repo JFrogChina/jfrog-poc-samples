@@ -64,7 +64,7 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ### 🔐 Add Users to Groups
 
-1. Go to **Identity & Access > Users**
+1. Go to **administration > User Management > Users**
 2. Edit user `app-dev`, assign group `app-dev`
 3. Edit user `app-security`, assign group `app-security`
 
