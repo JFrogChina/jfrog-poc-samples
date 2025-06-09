@@ -135,7 +135,7 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 ## 🚀 CI/CD Integration
 
 * 创建 Maven build  
-参考 [Maven Build Sample](https://github.com/JFrogChina/jfrog-poc-samples/tree/main/maven-sample)
+参考 [Maven Build Sample](https://github.com/JFrogChina/jfrog-poc-samples/tree/main?tab=readme-ov-file#7-build-and-deploy)
 
 * Use **JFrog CLI** to trigger build scans:
 
