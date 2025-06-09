@@ -36,6 +36,14 @@ This document outlines best practices for using **JFrog Xray** to ensure softwar
 
 ## 👥 User Groups and Permissions
 
+### Expected permission setup：
+
+| Group          | Read | Deploy | Delete | Annotate | Manage Xray Metadata |
+| -------------- | ---- | ------ | ------ | -------- | -------------------- |
+| `app-dev`      | ✔️   | ✔️     | ✔️     | ✔️       | ❌                    |
+| `app-security` | ✔️   | ❌      | ❌      | ❌        | ✔️                   |
+
+
 ### 🔧 Create User Groups
 ![](2025-06-06-14-52-57.png)
 
