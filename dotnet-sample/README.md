@@ -8,6 +8,11 @@
 ## Add Artifactory as remote repository
  nuget sources Add -Name Artifactory -Source https://art-server/artifactory/api/nuget/v3/alex-nuget/index.json -username user -password pwd
 
+
+For dotnet 8:
+```
+dotnet nuget add source  https://art-server.com/artifactory/api/nuget/v3/alex-nuget/index.json --name Artifactory --username alexwang --password yourpassword --store-password-in-clear-text
+```
 Check the source has been added
 ```
 nuget sources
