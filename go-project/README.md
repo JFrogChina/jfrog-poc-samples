@@ -97,6 +97,4 @@ go get github.com/your-org/your-repo@v1.0.0
 
 ## References
 
-- [JFrog Go Documentation](https://jfrog.com/help/r/jfrog-cli/go-cli-for-jfrog-artifactory/)
-- [Go Modules Documentation](https://golang.org/doc/modules/managing-dependencies)
-- [Artifactory Go Repository](https://jfrog.com/help/r/jfrog-artifactory-documentation/go-repositories)
+- [JFrog Go Documentation](https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli/binaries-management-with-jfrog-artifactory/package-managers-integration#building-go-packages)
