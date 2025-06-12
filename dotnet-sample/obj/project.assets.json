@@ -88,30 +88,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\blade\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/qingwang/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\MyProject.csproj",
+      "projectUniqueName": "/Users/qingwang/Documents/workspace/code/jfrog-poc-samples/dotnet-sample/MyProject.csproj",
       "projectName": "MyProject",
-      "projectPath": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\MyProject.csproj",
-      "packagesPath": "C:\\Users\\blade\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\blade\\Desktop\\jfrog\\jfrog-poc-samples\\dotnet-sample\\obj\\",
+      "projectPath": "/Users/qingwang/Documents/workspace/code/jfrog-poc-samples/dotnet-sample/MyProject.csproj",
+      "packagesPath": "/Users/qingwang/.nuget/packages/",
+      "outputPath": "/Users/qingwang/Documents/workspace/code/jfrog-poc-samples/dotnet-sample/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\blade\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+        "/Users/qingwang/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "https://soleng.jfrog.io/artifactory/api/nuget/v3/alex-nuget": {}
+        "/opt/homebrew/Cellar/dotnet/9.0.6/libexec/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
@@ -163,8 +159,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.6/libexec/sdk/9.0.107/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1904",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Text.Encodings.Web' 4.5.0 has a known critical severity vulnerability, https://github.com/advisories/GHSA-ghhp-997w-qr28",
+      "libraryId": "System.Text.Encodings.Web",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
