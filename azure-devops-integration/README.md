@@ -83,8 +83,8 @@ steps:
 1. 登入 JFrog Platform → `Xray > Watches`
 2. 建立 Watch 並選擇關聯的 Build 名稱或 Repository
 3. 關聯一條 Policy（範例）：
-   - CVSS ≥ 8.0 → Block
-   - 授權為 GPLv2 → Block
+   - CVSS ≥ 9.0 → Block
+   - 授權為 GPLv3 → Block
 4. 建置時自動觸發掃描，根據策略中止或通過
 
 ---
