@@ -2,6 +2,7 @@
 **/.gradle/
 **/.idea/
 **/target/
+**/.DS_Store
 **/bin/
 **/obj/
 !.mvn/wrapper/maven-wrapper.jar
