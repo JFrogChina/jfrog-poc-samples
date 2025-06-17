@@ -34,18 +34,7 @@ EKS IRSA uses `sts:AssumeRoleWithWebIdentity` to assume an IAM Role. JFrog maps 
 | EKS Pod pulling Docker image                   | ✅ Yes         | ✅ Best         
 
 
-## 🧩 Core Idea
 
-| Item                 | AssumeRole                              | Passwordless Access (IRSA + JFrog)       |
-|----------------------|------------------------------------------|------------------------------------------|
-| Triggered By         | CLI, CI tool, custom script              | EKS Pod with annotated ServiceAccount    |
-| Credentials Required | Yes (AccessKey, SecretKey, Token)        | No credentials needed                    |
-| Role Assumption      | Manual `sts:AssumeRole` call             | Automatic via OIDC and IRSA              |
-| Use Case             | General AWS access, CLI, CI              | Docker pull/push in EKS to JFrog         |
-| Token Rotation       | Automatic  (handled by jfrog-registry-operator)                                  | Automatic (handled by jfrog-registry-operator)    |
-| Secret Management    | SecretRotate                     | No secrets, passwordless                 |
-
----
 ---
 
 ## ✅ Summary Table
