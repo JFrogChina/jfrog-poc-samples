@@ -14,8 +14,7 @@ This diagram illustrates the end-to-end workflow for enabling **Passwordless Acc
 |  (has IRSA-enabled SA)   |
 +--------------------------+
             |
-            | SA has annotation:
-            | eks.amazonaws.com/role-arn=...
+            | IAM Roles Service Accounts
             v
 +-------------------------------+
 | 2. AWS STS (OIDC + IRSA)     |
