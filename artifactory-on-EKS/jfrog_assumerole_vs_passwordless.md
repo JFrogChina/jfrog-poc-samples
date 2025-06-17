@@ -12,6 +12,9 @@ This document compares **AWS IAM AssumeRole** with **JFrog's Passwordless Access
 | Who handles it? | AWS client assumes a role                      | JFrog maps IAM identity to a JFrog user            |
 | Credential type | Temporary STS token                            | No credentials stored in workload                  |
 
+For more information about:
+- AWS IAM AssumeRole capabilities, see [Setting Up JFrog's AssumeRole Capabilities in AWS](https://jfrog.com/help/r/setting-up-jfrog-s-assumerole-capabilities-in-aws/artifactory-setting-up-jfrog-s-assumerole-capabilities-in-aws)
+- Passwordless Access, see [Passwordless Access for Amazon EKS](https://jfrog.com/help/r/jfrog-installation-setup-documentation/passwordless-access-for-amazon-eks)
 
 ---
 
