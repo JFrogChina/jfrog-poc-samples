@@ -27,7 +27,7 @@ This document shows and compares the workflows for:
             v
 +------------------------+
 | JFrog Registry Operator|
-| watches secret      |
+| watches secret Custom Resource    |
 +------------------------+
             |
             | 3. Operator uses creds to:
