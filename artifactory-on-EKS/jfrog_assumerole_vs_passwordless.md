@@ -92,8 +92,7 @@ This document shows and compares the workflows for:
 
 | Feature                   | AssumeRole + JFrog Operator       | IRSA Passwordless Mode         |
 |---------------------------|-----------------------------------|-------------------------------|
-| Use Case                  | CI pipelines, external automation | EKS-native workloads          |
-| How role is assumed       | Manually by CLI or SDK            | Automatically via IRSA        |
+| Use Case                  | CI pipelines, external automation | EKS-native workloads         
 | Registry Operator used    | ✅ Yes                             | ✅ Yes                         |
 | imagePullSecret created   | ✅ Yes                             | ✅ Yes                         |
 | Secrets stored in pod     | ⚠️ Possibly (if manual export)     | ❌ No                          |
