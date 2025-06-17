@@ -14,6 +14,58 @@ This guide explains how to securely generate a `docker-registry` Kubernetes secr
 
 ---
 
+## 📦 Prerequisite step  1: Configure AWS Credentials
+
+Run the following command and input your AWS credentials:
+
+```bash
+aws configure
+```
+
+You will be prompted for:
+
+- `AWS Access Key ID`
+- `AWS Secret Access Key`
+- `Default region name` (e.g., `eu-central-1`)
+- `Default output format` (e.g., `json`)
+
+---
+
+## 🔗 Prerequisite step 2: Update kubeconfig for Your EKS Cluster
+
+Run the following command to generate the kubeconfig file:
+
+```bash
+aws eks --region <your-region> update-kubeconfig --name <your-cluster-name>
+```
+
+Example:
+
+```bash
+aws eks --region eu-central-1 update-kubeconfig --name my-eks-cluster
+```
+
+This will merge your EKS cluster access credentials into `~/.kube/config`.
+
+---
+
+## 🧪 Prerequisite step 3: Verify Cluster Access
+
+Test the connection with:
+
+```bash
+kubectl get nodes
+```
+
+Expected output (example):
+
+```text
+NAME                           STATUS   ROLES    AGE   VERSION
+ip-192-168-xx-xx.ec2.internal  Ready    <none>   10m   v1.29.x
+```
+
+---
+
 ## 🔐 Step 1: Store Artifactory Credentials in AWS Secrets Manager
 
 Create secret using:
