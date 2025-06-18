@@ -9,7 +9,7 @@ Yes — even when you use **JFrog SaaS** to pull your application container imag
 | Image Type                 | Default Source         | Can JFrog Replace It?     |
 |---------------------------|------------------------|----------------------------|
 | Kubernetes system images  | **ECR Public**         | ❌ Not recommended         |
-| Application workloads     | **JFrog SaaS**         | ✅ Yes, ideal              |
+| Application workloads     | **JFrog SaaS**         | ✅ Yes, for security scanning and compliance              |
 
 ---
 
