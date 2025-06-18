@@ -1,4 +1,4 @@
-# 🔐 JFrog Passwordless Access for Amazon EKS – Workflow Diagram
+# 🔐 JFrog Passwordless Access with AssumeRole for Amazon EKS – Workflow Diagram
 
 This diagram illustrates the end-to-end workflow for enabling **Passwordless Access** to JFrog Artifactory from **Amazon EKS**, based on the official JFrog guide:
 
