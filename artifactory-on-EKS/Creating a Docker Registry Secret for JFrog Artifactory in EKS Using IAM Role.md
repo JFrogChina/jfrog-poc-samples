@@ -1,4 +1,5 @@
-# 🛠️ Creating a Docker Registry Secret for JFrog Artifactory in EKS Using IAM Role
+# 🛠️ 
+
 
 This guide explains how to securely generate a `docker-registry` Kubernetes secret in EKS using **IAM Role for Service Account (IRSA)** + **AWS Secrets Manager** + **External Secrets Operator**, for authenticating with JFrog Artifactory's Docker registry.
 
