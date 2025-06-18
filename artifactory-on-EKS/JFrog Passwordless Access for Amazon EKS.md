@@ -58,6 +58,6 @@ This diagram illustrates the end-to-end workflow for enabling **Passwordless Acc
 
 - No password or API key required
 - Secure authentication via IAM + IRSA + STS
-- Secret is auto-managed and rotated by operator
+- Token is auto-managed and rotated by operator
 - Pod uses generated imagePullSecret to pull securely
 
