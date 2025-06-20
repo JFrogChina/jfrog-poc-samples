@@ -1,10 +1,6 @@
-Metadata-Version: 2.1
-Name: my-python-project
+Metadata-Version: 2.4
+Name: my_python_project
 Version: 0.1.0
-Summary: UNKNOWN
-Home-page: UNKNOWN
-License: UNKNOWN
-Platform: UNKNOWN
-
-UNKNOWN
-
+Requires-Dist: requests==2.25.1
+Requires-Dist: django==1.11.29
+Dynamic: requires-dist
