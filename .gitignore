@@ -9,6 +9,8 @@
 !**/src/main/**/target/
 !**/src/test/**/target/
 vulnerable-go-project
+
+*.whl
 ### STS ###
 .apt_generated
 .classpath
