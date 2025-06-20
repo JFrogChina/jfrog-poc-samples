@@ -11,7 +11,7 @@ This document compares **Guardrails** and **JFrog Advanced Security** across fou
 |------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
 | **SAST Languages**     | Java, JavaScript, TypeScript, Python, PHP, Ruby, Go, C, C++, Rust, Apex, .NET, Elixir, Solidity... | Java, JavaScript/TypeScript, Python,  C/C++, C# .NET ,Golang  |
 | **Dependency Scanning**| ❌                                                       | ✅ Go, PHP, Java (Maven/Gradle/Ivy), Scala SBT, JavaScript (npm, Bower, pnpm, YARN), .NET NuGet, Python PyPI & Conda, RubyGems, Objective‑C CocoaPods, C/C++ Conan, Rust Cargo, R CRAN, Swift SwiftPM; Debian, RPM, Alpine (OS packages); Docker & OCI containers (incl. Chainguard images); ML models (Hugging Face formats: bin, ckpt, h5, onnx, pth, etc.); CycloneDX SBOMs; Terraform modules/plans/state; generic archives (7z, zip, tar, etc.) and compression types (gz, xz, bz2, zstd, lzma). |
-| **Binary Analysis**    | ❌                                                                                            | ✅ Deep binary scanning (JAR, ELF, EXE, Docker, OCI, etc.)                               |
+| **Binary Analysis**    | ❌                                                                                            | ✅ Deep binary scanning (JAR, NPM, Docker, OCI, etc.)                               |
 | **IaC & Container**    | Dockerfile, Terraform, Kubernetes YAML                                                         | ✅ Docker, Helm, Terraform, Kubernetes                                   |
 
 > **Summary**: Guardrails excels at source-level scanning across modern languages; JFrog goes deeper with binary, container, and infrastructure coverage.
@@ -59,8 +59,7 @@ This document compares **Guardrails** and **JFrog Advanced Security** across fou
 | Git Secrets & Hardcoded Keys          | ✅ Strong pre-commit rules | ✅ Via CLI or IDE plugin                   |
 | Secrets in Container Layers           | ❌                         | ✅ Detects secrets in built images         |
 | Runtime Secrets / Env Analysis        | ❌                         | ✅ Supports runtime secret scanning        |
-| Detection in IaC Configurations       | ✅                         | ✅                                          |
-| Malicious Credential Detection        | ❌                         | ✅ With JFrog research-backed rules         |
+| Detection in IaC Configurations       | ✅                         | ✅                                         
 
 > **Summary**: Guardrails shines for early-stage secret scanning in Git repos; JFrog extends scanning to built images and runtime environments.
 
