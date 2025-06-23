@@ -11,7 +11,7 @@ This document compares **Guardrails** and **JFrog Advanced Security** across fou
 | ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **SAST Languages**      | Java, JavaScript, TypeScript, Python, PHP, Ruby, Go, C, C++, Rust, Apex, .NET, Elixir, Solidity... | Java, JavaScript/TypeScript, Python,  C/C++, C# .NET ,Golang |
 | **Dependency Scanning** | Android APK, C, C++, Objective-C, Dart, Debian dpkg, .NET, Go, Haskell, Java, JavaScript, PHP, Python, RedHat RPM, Ruby, Rust, Swift | Go, PHP, Java (Maven/Gradle/Ivy), Scala SBT, JavaScript (npm, Bower, pnpm, YARN), .NET NuGet, Python PyPI & Conda, RubyGems, Objective‑C CocoaPods, C/C++ Conan, Rust Cargo, R CRAN, Swift SwiftPM; Debian, RPM, Alpine (OS packages); Docker & OCI containers (incl. Chainguard images); ML models (Hugging Face formats: bin, ckpt, h5, onnx, pth, etc.); CycloneDX SBOMs; Terraform modules/plans/state; generic archives (7z, zip, tar, etc.) and compression types (gz, xz, bz2, zstd, lzma). |
-| **Binary Analysis**     | ❌                                                            | ✅ Deep binary scanning (Docker / OCI, JARs, ELFs, etc.)      |
+| **Binary Analysis**     | ❌                                                            | ✅ Deep binary scanning (Docker / OCI, JARs, etc.)      |
 
 > **Summary**: Guardrails excels at source-level scanning across modern languages; JFrog goes deeper with binary, container, and infrastructure coverage.
 
@@ -41,7 +41,7 @@ This document compares **Guardrails** and **JFrog Advanced Security** across fou
 | Detection Capability         | Guardrails              | JFrog Advanced Security                         |
 | ---------------------------- | ----------------------- | ----------------------------------------------- |
 | OSS CVE Detection (SCA)      | ✅ via manifest scanning | ✅ via manifest + binary context                 |
-| Binary Vulnerability Scan    | ❌                       | ✅ JAR, ELF, Docker, etc.                        |
+| Binary Vulnerability Scan    | ❌                       | ✅ JAR, Docker, etc.                        |
 | Vulnerability Prioritization | ❌                       | ✅Via JFrog Contextual Analysis                  |
 | CVSS & CVE Enrichment        | ❌ (NVD only)            | ✅ 20+ sources & JFrog Security Research         |
 | Supply Chain Protection      | ❌                       | ✅ Curated malicious package blocking (Curation) |
