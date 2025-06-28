@@ -1,0 +1,6 @@
+version: 1
+projects:
+  - type: gradle
+    workingDirs:
+      - ./gradle-sample
+    installCommand: "echo skip build"
