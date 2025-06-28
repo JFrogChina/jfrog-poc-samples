@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "log4js": "0.6.38",
-    "urllib3": "1.25.3"
+    "export-to-csv": "^1.4.0",
+    "log4js": "0.6.38"
   }
 }

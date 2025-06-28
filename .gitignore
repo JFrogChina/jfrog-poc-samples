@@ -9,6 +9,7 @@
 !**/src/main/**/target/
 !**/src/test/**/target/
 vulnerable-go-project
+**/node_modules/
 
 *.whl
 ### STS ###
