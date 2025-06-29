@@ -1,6 +1,9 @@
-version: 1
-projects:
-  - type: gradle
-    workingDirs:
-      - ./gradle-sample
-    installCommand: "echo skip build"
+# frogbot-config.yml for Frogbot >= 2.x
+- repository: jfrog-poc-samples
+  branches:
+    - main
+  projects:
+    - type: gradle
+      workingDirs:
+        - .
+      installCommand: "echo skip build"
