@@ -1,4 +1,3 @@
-# frogbot-config.yml for Frogbot >= 2.x
 - repository: jfrog-poc-samples
   branches:
     - main
@@ -6,4 +5,4 @@
     - type: gradle
       workingDirs:
         - .
-      installCommand: "echo skip build"
+      installCommand: "./gradlew tasks"
