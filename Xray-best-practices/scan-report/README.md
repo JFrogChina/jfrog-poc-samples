@@ -70,5 +70,23 @@ npm-remote/@lodash/lodash/4.17.21/package.tgz
 - Script prints warnings and continues if a move command fails
 
 ---
+
+1. Select remote maven repo to generate report
+   ![alt text](image-3.png)
+2. Click report generate
+   ![alt text](image-4.png)
+3. Click export to see the report id
+   ![alt text](image-5.png)
+4. Execute the python script, passing the id 262 in the command
+```bash
+python xray_vuln_report_export.py \
+  --url https://art-server.com \
+  --report-id 262 \
+  --token <YOUR_ACCESS_TOKEN> \
+  --target-repo alex-insecure-maven-repo \
+  --output vulnerable_paths.xlsx
+```
+5. See the logs and review the content under the target repo.
+All the vunlarable packages has been moved into the target reo
 ![alt text](image-2.png)
 ![alt text](image-1.png)
