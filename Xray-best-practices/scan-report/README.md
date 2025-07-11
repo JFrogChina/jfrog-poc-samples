@@ -1,77 +1,99 @@
-# 🐸 JFrog Xray Vulnerability Report Exporter
+# 🛡️ JFrog Xray Report Export Tool
 
-This Python script automates:
+This Python tool automates the process of generating, polling, exporting, and processing JFrog Xray **vulnerability** or **license** reports.\
+It extracts the affected artifact paths and copies them (and optional `.pom` files) from a remote-cache repository to a target repository using the `jf` CLI.
 
-- Generation of JFrog Xray vulnerability reports
-- Export of vulnerable artifact paths to Excel/CSV
-- Copying or moving artifacts using the JFrog CLI (`jf`)
-- Optional `--dry-run` for testing actions
+---
 
-## 🔧 Features
+## 📋 Features
 
-- Generate vulnerability reports filtered by severity
-- Export artifact paths to `.csv` or `.xlsx`
-- Copy (`cp`) or move (`mv`) files with `jf rt`
-- Support for Maven-related suffixes: `.jar`, `.pom`, `.jar.asc`, `.pom.asc`
+- Supports both `vulnerability` and `license` reports
+- Uses `curl` for exporting report data to ensure accurate results
+- Filters vulnerabilities by severity and licenses by name
+- Automatically skips `-sources.jar` and `-javadoc.jar` files
+- Copies `.pom` files along with `.jar` (for license reports)
+- Supports dry-run and copy/move options
 
-## 📦 Requirements
+---
 
-- Python 3.x
-- `jf` CLI installed and configured
-- Python packages: `pandas`, `openpyxl` (optional)
+## 🛠️ Requirements
 
-Install dependencies:
+- Python 3.6+
+- `jf` CLI installed and available in `PATH`
+- A valid access token for your JFrog instance
 
-```bash
-pip install pandas openpyxl
-```
+---
 
-## 🛠️ CLI Usage
+## 🚀 Usage
 
 ```bash
-python3 xray_export.py \
-  --url https://your.jfrog.url \
+python3 xray_vuln_report_export.py \
+  --url https://your.jfrog.instance \
   --token YOUR_ACCESS_TOKEN \
-  --source-repo my-maven-remote \
+  --source-repo fan-maven-remote \
   --target-repo insecure-maven-local \
+  --report-type vulnerability \
   --severity critical \
-  --output vulnerable_paths.xlsx \
-  --action cp \
-  --dry-run
+  --output report_vulnerabilities.xlsx
 ```
-
-## 🎛️ Parameters
-
-| Argument       | Description |
-|----------------|-------------|
-| `--url`        | Base URL of your JFrog Platform (e.g. `https://artifactory.com`) |
-| `--token`      | Access token with Xray and Artifactory permissions |
-| `--source-repo`| Remote repo to scan and copy from |
-| `--target-repo`| Local repo to copy/move vulnerable artifacts to |
-| `--severity`   | Minimum severity to filter (`low`, `medium`, `high`, `critical`) |
-| `--output`     | File name for results (`.csv` or `.xlsx`) |
-| `--action`     | `cp` (default) or `mv` to copy or move artifacts |
-| `--dry-run`    | Print CLI commands without executing |
-
-## 📤 Output
-
-- Generates a report via Xray API
-- Exports vulnerable paths to file
-- Prints or executes `jf rt cp|mv` commands
-
-## ✅ Example  Command
 
 ```bash
-python3 xray_vuln_report_export.py\                
-  --url https://demo.jfrogchina.com \
-  --token $ARTIFACTORY_TOKEN \
-  --target-repo alex-ignored-insecure-maven-repo \
-  --output vulnerable_paths.xlsx --severity critical --source-repo alex-maven-remote
+python3 xray_vuln_report_export.py \
+  --url https://your.jfrog.instance \
+  --token YOUR_ACCESS_TOKEN \
+  --source-repo fan-maven-remote \
+  --target-repo insecure-maven-local \
+  --report-type license \
+  --license-names MIT Apache-2.0 \
+  --output report_licenses.xlsx
 ```
 
-## 📎 Notes
+---
 
-- Uses `curl` for pagination export due to Xray API behavior
-- `jf` CLI must be installed and configured in PATH
-- `--dry-run` lets you preview what would be copied
+## 🧾 Command Arguments
+
+| Argument          | Description                                                                |
+| ----------------- | -------------------------------------------------------------------------- |
+| `--url`           | Base URL of JFrog instance (e.g., `https://demo.jfrogchina.com`)           |
+| `--token`         | Access token for authentication                                            |
+| `--source-repo`   | Base name of source repository (e.g., `fan-maven-remote`)                  |
+| `--target-repo`   | Target local repository to copy files into                                 |
+| `--report-type`   | Type of report to generate (`vulnerability` or `license`)                  |
+| `--severity`      | Minimum severity for vulnerabilities (`low`, `medium`, `high`, `critical`) |
+| `--license-names` | List of license names (for license reports only)                           |
+| `--output`        | Output file name (`.xlsx` or `.csv`)                                       |
+| `--action`        | `cp` to copy (default), or `mv` to move                                    |
+| `--dry-run`       | Only print actions without executing jfrog CLI                             |
+
+---
+
+## 📦 Export Logic
+
+- Calls Xray API to create a report (`POST /xray/api/v1/reports/...`)
+- Waits until the report is ready (polls export endpoint with `curl`)
+- Retrieves artifact paths page by page
+- Skips invalid paths and documentation/source files
+- Uses `jf rt cp` or `jf rt mv` to transfer `.jar` and `.pom` files
+
+---
+
+## 📁 Example Output
+
+```bash
+✅ Report created. ID = 357
+⏳ Waiting for report to complete...
+📄 Exporting report data...
+➡️ Processing: path=fan-maven-remote/org/example/lib/1.0/lib-1.0.jar, info=MIT
+🔁 (MIT) jf rt cp fan-maven-remote-cache/org/example/lib/1.0/lib-1.0.jar insecure-maven-local/lib-1.0.jar
+📎 Also copying POM: jf rt cp fan-maven-remote-cache/org/example/lib/1.0/lib-1.0.pom insecure-maven-local/lib-1.0.pom
+```
+
+---
+
+## 📌 Notes
+
+- License reports require `--license-names` to be provided.
+- Only `maven` packages are processed for license reports.
+- Report polling ensures the report is fully generated before export.
+- Results are saved to `.csv` or `.xlsx`, and printed in terminal for verification.
 
