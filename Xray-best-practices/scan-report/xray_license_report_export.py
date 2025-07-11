@@ -87,39 +87,6 @@ resp.raise_for_status()
 report_id = resp.json()["report_id"]
 print(f"✅ Report created. ID = {report_id}")
 
-# 轮询GET报告状态，直到status为completed
-import time
-
-status_url = f"{BASE_URL}/xray/api/v1/reports/vulnerabilities/{report_id}"
-print("⏳ Waiting for report to complete...")
-
-while True:
-    export_url = f"{BASE_URL}/xray/api/v1/reports/{REPORT_API_PATH}/{report_id}?page_num=1&num_of_rows=1"
-    print(f"🔍 Attempting export: curl -k -X POST '{export_url}'")
-
-    try:
-        result = subprocess.run([
-            "curl", "-sk", "-X", "POST", export_url,
-            "-H", f"Authorization: Bearer {args.token}",
-            "-H", "Content-Type: application/json"
-        ], stdout=subprocess.PIPE)
-        output = result.stdout.decode("utf-8")
-        data = json.loads(output)
-
-        print("📦 data[\"rows\"]:")
-        print(json.dumps(data.get("rows", []), indent=2))
-
-        if not data.get("rows"):
-            print("Report is not ready. Retry in 5 seconds")
-            time.sleep(5)
-        else:
-            print("✅ Report is ready for export.")
-            break
-    except Exception as e:
-        print(f"⚠️ Error during export: {e}")
-        time.sleep(5)
-        continue
-        
 print("\n--- 获取报告状态命令 ---")
 print(f"curl -k -X POST '{BASE_URL}/xray/api/v1/reports/{REPORT_API_PATH}/{report_id}?page_num=1&num_of_rows=100' ")
 print(f"  -H \"Authorization: Bearer $ARTIFACTORY_TOKEN\" ")
