@@ -62,7 +62,7 @@ python3 xray_export.py \
 ## ✅ Example  Command
 
 ```bash
-python3 xray_vuln_report_export.py \                
+python3 xray_vuln_report_export.py\                
   --url https://demo.jfrogchina.com \
   --token $ARTIFACTORY_TOKEN \
   --target-repo alex-ignored-insecure-maven-repo \

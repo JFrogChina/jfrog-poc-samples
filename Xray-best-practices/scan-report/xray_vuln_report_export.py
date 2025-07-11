@@ -24,8 +24,8 @@ parser.add_argument('--url', required=True, help='JFrog base URL')
 parser.add_argument('--token', required=True, help='Access token')
 parser.add_argument('--source-repo', required=True, help='Source repository to copy files from')
 parser.add_argument('--target-repo', required=True, help='Target repository to copy files into')
-parser.add_argument('--severity', default='low', choices=['low', 'medium', 'high', 'critical'],
-                    help='Minimum severity to include (default: low)')
+parser.add_argument('--severity', default='critical', choices=['low', 'medium', 'high', 'critical'],
+                    help='Minimum severity to include (default: critical)')
 parser.add_argument('--output', default='vulnerable_paths.xlsx', help='Output file name (.xlsx or .csv)')
 parser.add_argument('--action', default='cp', choices=['cp', 'mv'], help='jfrog CLI action (cp or mv), default cp')
 parser.add_argument('--dry-run', action='store_true', help='Only print actions without executing jfrog CLI commands')
