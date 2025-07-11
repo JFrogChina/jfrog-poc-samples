@@ -1,0 +1,12 @@
+{
+    "export_all" : false ,
+
+    "policies" : true ,
+    "watches" : true ,
+    "ignore_rules" : true,
+    "custom_licenses" : true ,
+    "custom_issues" : true ,
+    "webhooks" : true ,
+    "indexed_resources" : false ,
+    "ticketing_integrations" : true
+}
