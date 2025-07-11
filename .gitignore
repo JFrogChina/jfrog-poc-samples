@@ -10,7 +10,7 @@
 !**/src/test/**/target/
 vulnerable-go-project
 **/node_modules/
-
+*.xlsx
 *.whl
 ### STS ###
 .apt_generated
