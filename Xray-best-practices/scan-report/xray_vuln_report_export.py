@@ -150,20 +150,25 @@ while True:
             break
 
         for entry in data["rows"]:
+            # 统一收集dict，保留所有关键字段
             if args.report_type == "license" and entry.get("package_type") != "maven":
                 continue
-
-            path = entry.get("path")
+            # 只收集需要的字段
+            row = {
+                "path": entry.get("path"),
+                "package_type": entry.get("package_type", ""),
+            }
             if args.report_type == "vulnerability":
                 severity_raw = entry.get("severity", "low")
                 severity = severity_raw.lower()
                 sev_rank = severity_order.get(severity)
                 if sev_rank is None or sev_rank < SEVERITY_THRESHOLD:
                     continue
-                rows.append((path, severity))
+                row["severity"] = severity
             else:
                 license_name = entry.get("license") or entry.get("license_key") or ""
-                rows.append((path, license_name))
+                row["license"] = license_name
+            rows.append(row)
         page += 1
     except Exception as e:
         print(f"⚠️ Error during export: {e}")
@@ -175,7 +180,7 @@ if not rows:
     exit(0)
 
 print(f"💾 Exporting {len(rows)} paths to {args.output}")
-df = pd.DataFrame(rows, columns=["path", "severity_or_license"])
+df = pd.DataFrame(rows)
 if args.output.endswith(".csv"):
     df.to_csv(args.output, index=False)
 else:
@@ -190,52 +195,49 @@ if not jfrog_cli:
 print(f"📁 Copying related files from '{args.source_repo}' to '{args.target_repo}' ...")
 visited = set()
 
-for path, info in rows:
-    print(f"➡️ Processing: path={path}, info={info}")
+def copy_artifact(source_repo, target_repo, rel_path, dry_run=False):
+    src = f"{source_repo}-cache/{rel_path}"
+    tgt = f"{target_repo}/"  # 只写仓库名或目标目录
+    cmd = [jfrog_cli, "rt", "cp", src, tgt]
+    print(f"🔁 jf rt cp {src} {tgt}")
+    if not dry_run:
+        try:
+            subprocess.run(cmd, check=True)
+        except subprocess.CalledProcessError:
+            print(f"⚠️ Failed to copy: {src}")
+
+for entry in rows:
+    path = entry.get("path")
+    package_type = entry.get("package_type", "")
+    if not path or not package_type:
+        continue
+    # Remove leading repo name
     parts = path.split("/", 1)
     if len(parts) != 2:
         print(f"❌ Invalid path format: {path}")
         continue
-    _repo_from_report, relative_path = parts
-
-    full_path = Path(relative_path)
-    filename = full_path.name
-    if not filename or "." not in filename:
-        print(f"⚠️ Skipping invalid filename: {filename}")
-        continue
-
-    if filename.endswith("-sources.jar") or filename.endswith("-javadoc.jar"):
-        print(f"⚠️ Skipping source/doc jar: {filename}")
-        continue
-
-    source_path = f"{args.source_repo}-cache/{relative_path}"
-    target_path = f"{args.target_repo}/{filename}"
-    key = (source_path, target_path)
-    if key in visited:
-        continue
-    visited.add(key)
-    cmd = [jfrog_cli, "rt", args.action, source_path, target_path]
-    print(f"🔁 ({info}) {' '.join(cmd)}")
-    if not args.dry_run:
-        try:
-            subprocess.run(cmd, check=True)
-        except subprocess.CalledProcessError:
-            print(f"⚠️ Failed to {args.action}: {source_path}")
-
-    # 追加 POM 拷贝逻辑
-    if args.report_type == "license" and filename.endswith(".jar"):
-        pom_name = filename.replace(".jar", ".pom")
-        pom_source_path = f"{args.source_repo}-cache/{full_path.parent}/{pom_name}"
-        pom_target_path = f"{args.target_repo}/{pom_name}"
-        pom_key = (pom_source_path, pom_target_path)
-        if pom_key not in visited:
-            visited.add(pom_key)
-            pom_cmd = [jfrog_cli, "rt", args.action, str(pom_source_path), str(pom_target_path)]
-            print(f"📎 Also copying POM: {' '.join(pom_cmd)}")
-            if not args.dry_run:
-                try:
-                    subprocess.run(pom_cmd, check=True)
-                except subprocess.CalledProcessError:
-                    print(f"⚠️ Failed to {args.action}: {pom_source_path}")
+    rel_path = parts[1]
+    # maven
+    if package_type == "maven":
+        if rel_path.endswith(".jar") or rel_path.endswith(".pom"):
+            copy_artifact(args.source_repo, args.target_repo, rel_path, getattr(args, 'dry_run', False))
+    # npm
+    elif package_type == "npm":
+        if rel_path.endswith(".tgz"):
+            # copy .tgz
+            copy_artifact(args.source_repo, args.target_repo, rel_path, getattr(args, 'dry_run', False))
+            # copy package.json in same dir
+            pkg_dir = os.path.dirname(rel_path)
+            pkg_json_path = f"{pkg_dir}/package.json"
+            copy_artifact(args.source_repo, args.target_repo, pkg_json_path, getattr(args, 'dry_run', False))
+    # nuget
+    elif package_type == "nuget":
+        if rel_path.endswith(".nupkg"):
+            # copy .nupkg
+            copy_artifact(args.source_repo, args.target_repo, rel_path, getattr(args, 'dry_run', False))
+            # copy .nuspec in same dir, same base name
+            base = os.path.splitext(os.path.basename(rel_path))[0]
+            nuspec_path = f"{os.path.dirname(rel_path)}/{base}.nuspec"
+            copy_artifact(args.source_repo, args.target_repo, nuspec_path, getattr(args, 'dry_run', False))
 
 print(f"✅ Xray {args.report_type} report export completed!")
