@@ -1,92 +1,77 @@
-# 🛡️ Xray Vulnerability Report Exporter
+# 🐸 JFrog Xray Vulnerability Report Exporter
 
-This script extracts vulnerable artifact paths from a JFrog Xray report and optionally moves them to a target repository using the `jfrog rt mv` CLI command. It also detects remote repositories and converts them to `-cache` format for source path resolution.
+This Python script automates:
 
----
+- Generation of JFrog Xray vulnerability reports
+- Export of vulnerable artifact paths to Excel/CSV
+- Copying or moving artifacts using the JFrog CLI (`jf`)
+- Optional `--dry-run` for testing actions
 
-## 🔧 CLI Arguments
+## 🔧 Features
 
-| Argument         | Required | Description                                                                 |
-|------------------|----------|-----------------------------------------------------------------------------|
-| `--url`          | Yes      | Base URL of your JFrog instance, e.g., `https://art-server.com`       |
-| `--report-id`    | Yes      | ID of the Xray vulnerability report                                        |
-| `--token`        | Yes      | JFrog Access Token                                                          |
-| `--target-repo`  | Yes      | Target repository to move vulnerable artifacts to                          |
-| `--output`       | No       | Output file name (.xlsx or .csv). Defaults to `vulnerable_paths.xlsx`      |
+- Generate vulnerability reports filtered by severity
+- Export artifact paths to `.csv` or `.xlsx`
+- Copy (`cp`) or move (`mv`) files with `jf rt`
+- Support for Maven-related suffixes: `.jar`, `.pom`, `.jar.asc`, `.pom.asc`
 
----
+## 📦 Requirements
 
-## 🚀 Example Usage
+- Python 3.x
+- `jf` CLI installed and configured
+- Python packages: `pandas`, `openpyxl` (optional)
 
-```bash
-python xray_vuln_report_export.py \
-  --url https://art-server.com \
-  --report-id 262 \
-  --token <YOUR_ACCESS_TOKEN> \
-  --target-repo alex-insecure-maven-repo \
-  --output vulnerable_paths.xlsx
-```
-
----
-
-## 📦 Features
-
-1. **Fetch Vulnerabilities**: Paginates and extracts paths from a specified Xray report.
-2. **Export**: Outputs all paths to `.xlsx` or `.csv` without headers.
-3. **Repository Detection**: Auto fetches repository types via Artifactory API.
-4. **Path Normalization**: Appends `-cache` to source repository name for remote repo resolution.
-5. **Move Artifacts**: Uses `jfrog rt mv` to relocate vulnerable artifacts to a specified repository.
-
----
-
-## ✅ Prerequisites
-
-- Python 3.6+
-- `jfrog` CLI installed and configured (must be accessible via `PATH`)
-- Required Python libraries:
+Install dependencies:
 
 ```bash
-cd scan-report
-python3 -m venv venv  
-source venv/bin/activate
-pip install requests pandas openpyxl
+pip install pandas openpyxl
 ```
 
----
+## 🛠️ CLI Usage
 
-## 📁 Sample CSV Output
-
-```
-maven-remote/org/apache/log4j/log4j-core/2.14.0/log4j-core-2.14.0.jar
-npm-remote/@lodash/lodash/4.17.21/package.tgz
-```
-
----
-
-## ⚠️ Notes
-
-- All source repos are transformed by appending `-cache` (e.g., `maven-remote` → `maven-remote-cache`)
-- The move command runs `jfrog rt mv <source> <target>` for each artifact
-- Script prints warnings and continues if a move command fails
-
----
-
-1. Select remote maven repo to generate report
-   ![alt text](image-3.png)
-2. Click report generate
-   ![alt text](image-4.png)
-3. Click export to see the report id
-   ![alt text](image-5.png)
-4. Execute the python script, passing the id 262 in the command
 ```bash
-python xray_vuln_report_export.py \
-  --url https://art-server.com \
-  --report-id 262 \
-  --token <YOUR_ACCESS_TOKEN> \
-  --target-repo alex-insecure-maven-repo \
-  --output vulnerable_paths.xlsx
+python3 xray_export.py \
+  --url https://your.jfrog.url \
+  --token YOUR_ACCESS_TOKEN \
+  --source-repo my-maven-remote \
+  --target-repo insecure-maven-local \
+  --severity critical \
+  --output vulnerable_paths.xlsx \
+  --action cp \
+  --dry-run
 ```
-5. See the logs and review the content under the target repo.
-All the vunlarable packages has been moved into the target reo
-![alt text](image-2.png)
-![alt text](image-1.png)
+
+## 🎛️ Parameters
+
+| Argument       | Description |
+|----------------|-------------|
+| `--url`        | Base URL of your JFrog Platform (e.g. `https://artifactory.com`) |
+| `--token`      | Access token with Xray and Artifactory permissions |
+| `--source-repo`| Remote repo to scan and copy from |
+| `--target-repo`| Local repo to copy/move vulnerable artifacts to |
+| `--severity`   | Minimum severity to filter (`low`, `medium`, `high`, `critical`) |
+| `--output`     | File name for results (`.csv` or `.xlsx`) |
+| `--action`     | `cp` (default) or `mv` to copy or move artifacts |
+| `--dry-run`    | Print CLI commands without executing |
+
+## 📤 Output
+
+- Generates a report via Xray API
+- Exports vulnerable paths to file
+- Prints or executes `jf rt cp|mv` commands
+
+## ✅ Example  Command
+
+```bash
+python3 xray_vuln_report_export.py \                
+  --url https://demo.jfrogchina.com \
+  --token $ARTIFACTORY_TOKEN \
+  --target-repo alex-ignored-insecure-maven-repo \
+  --output vulnerable_paths.xlsx --severity critical --source-repo alex-maven-remote
+```
+
+## 📎 Notes
+
+- Uses `curl` for pagination export due to Xray API behavior
+- `jf` CLI must be installed and configured in PATH
+- `--dry-run` lets you preview what would be copied
+
