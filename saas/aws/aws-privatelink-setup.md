@@ -64,3 +64,10 @@ This document outlines the steps to configure AWS and JFrog Private Link to ensu
 2. **Create Private Record For you JFrog :**
    - Add a CNAME record 
    ![Create Endpoint](image/14.png)
+2. **Verify your connection from your VM to jfrog saas platform :**
+  ```
+[ec2-user@ip-10-0-0-12 ~]$ nslookup yoursaas.pe.jfrog.io
+Server:		10.0.0.2
+Address:	10.0.0.2#53
+  ```
+   ![alt text](image.png)
