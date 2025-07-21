@@ -27,6 +27,7 @@ vulnerable-go-project
 *.iws
 *.iml
 *.ipr
+**/.gradle/
 
 ### NetBeans ###
 /nbproject/private/
