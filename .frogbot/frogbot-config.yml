@@ -2,7 +2,6 @@
   branches:
     - main
   projects:
-    - type: gradle
+    - type: go
       workingDirs:
-        - .
-      installCommand: "./gradlew tasks"
+        - ./go-project
