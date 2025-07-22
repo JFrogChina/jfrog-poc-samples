@@ -1,10 +1,5 @@
-services:
-  jfrog:
-    # JFrog platform connection details are stored as environment variables in the CI.
-projects:
-  - path: dotnet-sample/
-  - path: go-project/
-  - path: gradle-sample/
-  - path: jfrog-npm-demo/
-  - path: maven-sample/
-  - path: python-sample/
+params:
+  scan:
+    projects:
+      - path: gradle-sample/
+      - path: maven-sample/
