@@ -1,24 +1,4 @@
-plugins {
-    id 'java'
-    id 'maven-publish'
-    id 'com.jfrog.artifactory' version '4.24.22'
-}
-
-group = 'com.example'
-version = '1.0.0'
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-}
-
-dependencies {
-    implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
-    testImplementation 'junit:junit:4.7'
-}
+// ✅ 先放 buildscript 块
 buildscript {
     repositories {
         maven {
@@ -30,7 +10,34 @@ buildscript {
     }
 }
 
-// ⚠️ 注释掉此段，避免找不到方法
+// ✅ plugins 块其后
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.jfrog.artifactory' version '4.24.22'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
+    testImplementation 'junit:junit:4.7'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+// ❗可选：如果你想执行 `artifactoryPublish`，可以保留这段
 // artifactoryPublish {
 //     publications('mavenJava')
 // }
