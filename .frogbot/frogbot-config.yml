@@ -1,7 +1,10 @@
-- repository: jfrog-poc-samples
-  branches:
-    - main
-  projects:
-    - type: go
-      workingDirs:
-        - ./go-project
+services:
+  jfrog:
+    # JFrog platform connection details are stored as environment variables in the CI.
+projects:
+  - path: dotnet-sample/
+  - path: go-project/
+  - path: gradle-sample/
+  - path: jfrog-npm-demo/
+  - path: maven-sample/
+  - path: python-sample/
