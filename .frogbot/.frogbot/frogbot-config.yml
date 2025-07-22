@@ -1,0 +1,13 @@
+version: 1
+
+repositories:
+  - repository: https://github.com/JFrogChina/jfrog-poc-samples
+    branches:
+      - main
+    project: default
+    watches:
+      - default-watch
+    scan-pull-requests: true
+    scan-pushes: true
+    dirs:
+      - maven-sample
