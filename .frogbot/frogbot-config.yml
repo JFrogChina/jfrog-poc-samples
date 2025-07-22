@@ -1,5 +1,0 @@
-params:
-  scan:
-    projects:
-      - path: gradle-sample/
-      - path: maven-sample/
