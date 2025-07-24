@@ -111,4 +111,33 @@ jobs:
 
         echo "### Go Build" >> $GITHUB_STEP_SUMMARY
 
+    # Setup Java for Maven
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
+    # Configure Maven to use Artifactory
+    - name: Configure Maven with JFrog CLI
+      run: |
+        jf mvnc --repo-resolve-releases="alex-maven" \
+                --repo-resolve-snapshots="alex-maven" \
+                --repo-deploy-releases="alex-maven" \
+                --repo-deploy-snapshots="alex-maven" \
+                --server-id-resolve=$SERVER_ID \
+                --server-id-deploy=$SERVER_ID
+
+    # Build Maven Project and deploy artifacts
+    - name: Build Maven Project
+      working-directory: ./maven-sample
+      run: |
+        jf rt mvn clean install \
+          --build-name="Maven-Sample-Build" \
+          --build-number="${{ github.run_id }}"
+
+    # Publish Maven Build Info to Artifactory
+    - name: Publish Maven Build Info to Artifactory
+      run: |
+        jf rt build-publish "Maven-Sample-Build" "${{ github.run_id }}"
+        jf bs Maven-Sample-Build "${{ github.run_id }}" --fail=false
