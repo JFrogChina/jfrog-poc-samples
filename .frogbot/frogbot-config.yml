@@ -112,6 +112,6 @@
 
     # [Optional]
     # Xray Watches. Learn more about it [here](https://www.jfrog.com/confluence/display/JFROG/Configuring+Xray+Watches)
-    watches:
-     - "alexwang-build-watch"
+    # watches:
+    #  - "alexwang-build-watch"
 
