@@ -92,9 +92,10 @@ jobs:
         go-version: '1.21.x'
 
     - name: Build Go Project with JFrog CLI
+      working-directory: ./go-sample
       run: |
         jf goc --repo-resolve="alex-go" --server-id-resolve=$SERVER_ID
-        jf rt go build go-sample/main.go --build-name="Go-Sample-Build" --build-number="${{ github.run_id }}"
+        jf rt go build main.go --build-name="Go-Sample-Build" --build-number="${{ github.run_id }}"
 
     - name: Publish Go Build Info to Artifactory
       run: |
