@@ -85,3 +85,42 @@ jobs:
         jf rt build-publish "DotNet-Sample-Build" "${{ github.run_id }}"
         jf bs DotNet-Sample-Build "${{ github.run_id }}"   --fail=false
 
+    # Go Project Build
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21.x'
+
+    - name: Build Go Project with JFrog CLI
+      run: |
+        export SERVER_ID="test"
+        jf c add $SERVER_ID --url=${{ secrets.JFROG_URL}} --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
+        jf c use $SERVER_ID
+        jf c show
+        jf rt ping
+        jf goc --repo-resolve="alex-go" --server-id-resolve=$SERVER_ID
+        jf rt go build go-sample/main.go --build-name="Go-Sample-Build" --build-number="${{ github.run_id }}"
+
+    - name: Publish Go Build Info to Artifactory
+      run: |
+        jf rt build-publish "Go-Sample-Build" "${{ github.run_id }}"
+        jf bs Go-Sample-Build "${{ github.run_id }}" --fail=false
+
+    # Build Summary
+    - name: Build Summary
+      if: always()
+      run: |
+        echo "## Build Summary" > $GITHUB_STEP_SUMMARY
+        echo "### DotNet Build" >> $GITHUB_STEP_SUMMARY
+        if [ ${{ steps.build.outcome }} = 'success' ]; then
+          echo ":white_check_mark: DotNet build succeeded" >> $GITHUB_STEP_SUMMARY
+        else
+          echo ":x: DotNet build failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "### Go Build" >> $GITHUB_STEP_SUMMARY
+        if [ ${{ steps.Build_Go_Project_with_JFrog_CLI.outcome }} = 'success' ]; then
+          echo ":white_check_mark: Go build succeeded" >> $GITHUB_STEP_SUMMARY
+        else
+          echo ":x: Go build failed" >> $GITHUB_STEP_SUMMARY
+        fi
+
