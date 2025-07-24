@@ -121,10 +121,10 @@ jobs:
     # Configure Maven to use Artifactory
     - name: Configure Maven with JFrog CLI
       run: |
-        jf mvnc --repo-resolve-releases="alex-maven" \
-                --repo-resolve-snapshots="alex-maven" \
-                --repo-deploy-releases="alex-maven" \
-                --repo-deploy-snapshots="alex-maven" \
+        jf mvnc --repo-resolve-releases="alex-maven-virtual" \
+                --repo-resolve-snapshots="alex-maven-virtual" \
+                --repo-deploy-releases="alex-maven-virtual" \
+                --repo-deploy-snapshots="alex-maven-virtual" \
                 --server-id-resolve=$SERVER_ID \
                 --server-id-deploy=$SERVER_ID
 
