@@ -106,11 +106,20 @@ jobs:
     - name: Build Summary
       if: always()
       run: |
-        echo "## Build Summary" > $GITHUB_STEP_SUMMARY
-        echo "### DotNet Build" >> $GITHUB_STEP_SUMMARY
+         echo "### 🟦 DotNet Build" >> $GITHUB_STEP_SUMMARY
+        echo "- [Artifacts in Artifactory](${{ vars.JFROG_URL }}/ui/repos/tree/General/${{ env.NUGET_REPO_NAME }}/dotnet-sample)" >> $GITHUB_STEP_SUMMARY
+        echo "- [Build Info](${{ vars.JFROG_URL }}/ui/builds/DotNet-Sample-Build/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
 
-        echo "### Go Build" >> $GITHUB_STEP_SUMMARY
+        echo "### 🟨 Go Build" >> $GITHUB_STEP_SUMMARY
+        echo "- [Artifacts in Artifactory](${{ vars.JFROG_URL }}/ui/repos/tree/General/alex-go/github.com/jfrog-poc-samples/go-sample)" >> $GITHUB_STEP_SUMMARY
+        echo "- [Build Info](${{ vars.JFROG_URL }}/ui/builds/Go-Sample-Build/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
 
+        echo "### 🟧 NPM Build" >> $GITHUB_STEP_SUMMARY
+        echo "- [Artifacts in Artifactory](${{ vars.JFROG_URL }}/ui/repos/tree/General/alex-npm/npm-sample)" >> $GITHUB_STEP_SUMMARY
+        echo "- [Build Info](${{ vars.JFROG_URL }}/ui/builds/NPM-Sample-Build/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+        
     # Setup Java for Maven
     - name: Setup Java JDK
       uses: actions/setup-java@v4
@@ -141,3 +150,31 @@ jobs:
       run: |
         jf rt build-publish "Maven-Sample-Build" "${{ github.run_id }}"
         jf bs Maven-Sample-Build "${{ github.run_id }}" --fail=false
+
+    # Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    # Install Dependencies and Run Build
+    - name: Install Dependencies and Build NPM Project
+      working-directory: ./npm-sample
+      run: |
+        npm install
+        npm run build || echo "no build script defined"
+
+    # Publish to Artifactory NPM Repo
+    - name: Publish NPM Package to Artifactory
+      working-directory: ./npm-sample
+      run: |
+        jf rt npm-config --repo-resolve=alex-npm --server-id-resolve=$SERVER_ID
+        jf rt npm-publish \
+          --build-name="NPM-Sample-Build" \
+          --build-number="${{ github.run_id }}"
+
+    # Publish NPM Build Info
+    - name: Publish NPM Build Info to Artifactory
+      run: |
+        jf rt build-publish "NPM-Sample-Build" "${{ github.run_id }}"
+        jf bs NPM-Sample-Build "${{ github.run_id }}" --fail=false
