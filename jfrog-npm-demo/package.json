@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "export-to-csv": "^1.4.0",
-    "log4js": "0.6.38"
+    "log4js": "^6.4.0"
   }
 }
