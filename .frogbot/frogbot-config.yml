@@ -83,7 +83,7 @@
             - maven-sample
             - npm-sample
             - python-sample
-            # - go-sample
+            - go-sample
       # [Default: ["*.git*", "*node_modules*", "*target*", "*venv*", "*test*"]]
       # List of exclusion patterns (utilizing wildcards) for excluding paths in the source code of the Git repository during SCA scans.
       #   pathExclusions:
