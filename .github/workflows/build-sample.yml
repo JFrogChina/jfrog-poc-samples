@@ -108,15 +108,7 @@ jobs:
       run: |
         echo "## Build Summary" > $GITHUB_STEP_SUMMARY
         echo "### DotNet Build" >> $GITHUB_STEP_SUMMARY
-        if [ ${{ steps.build.outcome }} = 'success' ]; then
-          echo ":white_check_mark: DotNet build succeeded" >> $GITHUB_STEP_SUMMARY
-        else
-          echo ":x: DotNet build failed" >> $GITHUB_STEP_SUMMARY
-        fi
+
         echo "### Go Build" >> $GITHUB_STEP_SUMMARY
-        if [ ${{ steps.Build_Go_Project_with_JFrog_CLI.outcome }} = 'success' ]; then
-          echo ":white_check_mark: Go build succeeded" >> $GITHUB_STEP_SUMMARY
-        else
-          echo ":x: Go build failed" >> $GITHUB_STEP_SUMMARY
-        fi
+
 
