@@ -93,11 +93,6 @@ jobs:
 
     - name: Build Go Project with JFrog CLI
       run: |
-        export SERVER_ID="test"
-        jf c add $SERVER_ID --url=${{ secrets.JFROG_URL}} --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
-        jf c use $SERVER_ID
-        jf c show
-        jf rt ping
         jf goc --repo-resolve="alex-go" --server-id-resolve=$SERVER_ID
         jf rt go build go-sample/main.go --build-name="Go-Sample-Build" --build-number="${{ github.run_id }}"
 
