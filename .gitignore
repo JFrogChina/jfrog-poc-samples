@@ -44,3 +44,4 @@ build/
 /public.pem
 *.pem
 python/dist/
+dotnet-sample/obj/
