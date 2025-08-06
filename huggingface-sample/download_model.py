@@ -7,7 +7,7 @@ if not RT_token:
     raise ValueError("Please set the SOLENG_IO_TOKEN environment variable.")
 
 # Model name
-model_name = "shibing624/text2vec-base-chinese"  # Replace with the model you want to download
+model_name = "huggingbob/test"  # Replace with the model you want to download
 
 # Download the model snapshot
 snapshot_download(
