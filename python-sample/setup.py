@@ -6,6 +6,6 @@ setup(
     packages=find_packages(),
     install_requires=[
         'requests==2.25.1',
-        'django==1.11.29',  # Known critical vulnerability
+        'django==4.2.22',  # Known critical vulnerability
     ],
 )
