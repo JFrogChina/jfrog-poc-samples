@@ -171,8 +171,7 @@ COSIGN_EXPERIMENTAL=1 cosign verify \
 ## ✅ 6. References
 
 - [Sigstore Cosign Official Documentation](https://docs.sigstore.dev/cosign/overview/)
-- [JFrog Docker Registry User Guide](https://jfrog.com/help/r/jfrog-artifactory-documentation/docker-registry)
-- [Fulcio Root CA and OIDC Signing Mechanism](https://fulcio.sigstore.dev)
+- [Configure the Docker Client with Docker Content Trust](https://jfrog.com/help/r/jfrog-artifactory-documentation/configure-docker-notary-and-docker-client)
 
 ---
 
