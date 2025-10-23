@@ -84,7 +84,7 @@ The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the transparency log
   - The certificate was verified against the Fulcio root CA
-  - Certificate subject: wq237wq@gmail.com
+  - Certificate subject: yourmail@gmail.com
   - Certificate issuer: https://accounts.google.com
 ```
 
@@ -112,7 +112,7 @@ COSIGN_EXPERIMENTAL=1 cosign verify \
 
 Common error:
 ```
-no matching signatures: none of the expected identities matched what was in the certificate, got subjects [wq237wq@gmail.com] with issuer https://accounts.google.com
+no matching signatures: none of the expected identities matched what was in the certificate, got subjects [yourmail@gmail.com] with issuer https://accounts.google.com
 ```
 
 ✅ **Cause:** The signing account differs from the verification identity.
@@ -127,7 +127,7 @@ COSIGN_EXPERIMENTAL=1 cosign verify --insecure-ignore-tlog test.jfrog.io/alex-do
 2️⃣ Use the correct identity from the output:
 ```bash
 COSIGN_EXPERIMENTAL=1 cosign verify \
-  --certificate-identity "wq237wq@gmail.com" \
+  --certificate-identity "yourmail@gmail.com" \
   --certificate-oidc-issuer "https://accounts.google.com" \
   test.jfrog.io/alex-docker-local/jas-demo:v4
 ```
@@ -140,7 +140,7 @@ COSIGN_EXPERIMENTAL=1 cosign verify \
 
 ```bash
 COSIGN_EXPERIMENTAL=1 cosign verify \
-  --certificate-identity "wq237wq@gmail.com" \
+  --certificate-identity "yourmail@gmail.com" \
   --certificate-oidc-issuer "https://accounts.google.com" \
   --output json \
   test.jfrog.io/alex-docker-local/jas-demo:v4 | jq
