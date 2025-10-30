@@ -1,13 +1,13 @@
 name: "Frogbot Security Scan"
 
 on:
-  pull_request_target: 
+  pull_request_target:
     types: [opened, synchronize] # Triggers scan-pr flow for every opened/updated pull request
   push: # Triggers scan-repo flow for every push to the specified branches
     branches:
       - main
   schedule:
-    - cron: "0 0 * * *"   # The repository will be scanned once a day at 00:00 GMT.
+    - cron: "0 0 * * *" # The repository will be scanned once a day at 00:00 GMT.
   workflow_dispatch: # The repository will be scanned on demand
 
 permissions:
@@ -25,12 +25,6 @@ jobs:
         # The repository scanning will be triggered periodically on the following branches.
         branch: ["main"]
     steps:
-      - name: Force npm to use public registry
-        run: |
-          echo "Setting registry to https://registry.npmjs.org/"
-          npm config set registry https://registry.npmjs.org/
-          npm config delete //registry.npmjs.org/:_authToken || true
-          npm config get registry
       - uses: jfrog/frogbot@v2
         # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
         # Insert to oidc-provider-name the 'Provider Name' defined in the OIDC integration configured in the JPD
@@ -40,4 +34,4 @@ jobs:
           JF_URL: ${{ secrets.JF_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JF_GIT_BASE_BRANCH: ${{ matrix.branch }}    # For repository scan action
+          JF_GIT_BASE_BRANCH: ${{ matrix.branch }} # For repository scan action
