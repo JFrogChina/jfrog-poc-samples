@@ -25,12 +25,17 @@ jobs:
         dotnet-version: 9.x 
 
     # This action sets up the JFrog CLI with the Artifactory URL and access token     
+    # - uses: jfrog/setup-jfrog-cli@v4
+    #   env:
+    #     JF_URL: ${{ vars.JFROG_URL }}
+    #     JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
+
     - uses: jfrog/setup-jfrog-cli@v4
       env:
-        JF_URL: ${{ vars.JFROG_URL }}
-        JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
-
-
+          JF_URL: ${{ vars.JF_URL }}
+      with:
+          oidc-provider-name: setup-jfrog-cli
+          
     # This command adds a new server configuration to the JFrog CLI, as an alternative for using the setup-jfrog-cli action    
     - run: |
         export SERVER_ID="test"
