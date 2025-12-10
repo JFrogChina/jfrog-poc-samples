@@ -32,9 +32,9 @@ jobs:
 
     - uses: jfrog/setup-jfrog-cli@v4
       env:
-          JF_URL: ${{ vars.JF_URL }}
+        JF_URL: ${{ vars.JF_URL }}
       with:
-          oidc-provider-name: setup-jfrog-cli
+        oidc-provider-name: alexwang-github
           
     # This command adds a new server configuration to the JFrog CLI, as an alternative for using the setup-jfrog-cli action    
     - run: |
