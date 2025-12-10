@@ -166,6 +166,7 @@ jobs:
     - name: Install Dependencies and Build NPM Project
       working-directory: ./npm-sample
       run: |
+        jf rt npm-config --repo-resolve=alex-npm-virtual --server-id-resolve=$SERVER_ID
         npm install
         npm run build || echo "no build script defined"
 
@@ -173,7 +174,6 @@ jobs:
     - name: Publish NPM Package to Artifactory
       working-directory: ./npm-sample
       run: |
-        jf rt npm-config --repo-resolve=alex-npm-virtual --server-id-resolve=$SERVER_ID
         jf rt npm-publish \
           --build-name="NPM-Sample-Build" \
           --build-number="${{ github.run_id }}"
