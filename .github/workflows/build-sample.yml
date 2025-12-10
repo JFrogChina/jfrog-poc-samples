@@ -166,7 +166,7 @@ jobs:
     - name: Install Dependencies and Build NPM Project
       working-directory: ./npm-sample
       run: |
-        jf npm-config --repo-resolve=alex-npm-virtual --server-id-resolve=$SERVER_ID
+        jf npm-config --repo-resolve=alex-npm-virtual --repo-deploy=alex-npm-virtual --server-id-resolve=$SERVER_ID
         jf npm install  \
           --build-name="NPM-Sample-Build" \
           --build-number="${{ github.run_id }}"
