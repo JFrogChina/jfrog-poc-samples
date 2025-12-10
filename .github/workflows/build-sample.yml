@@ -146,7 +146,7 @@ jobs:
     - name: Build Maven Project
       working-directory: ./maven-sample
       run: |
-        jf rt mvn clean install \
+        jf rt mvn install \
           --build-name="Maven-Sample-Build" \
           --build-number="${{ github.run_id }}"
 
