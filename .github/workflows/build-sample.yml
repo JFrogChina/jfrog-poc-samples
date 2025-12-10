@@ -175,7 +175,7 @@ jobs:
     - name: Publish NPM Package to Artifactory
       working-directory: ./npm-sample
       run: |
-        jf npm-publish \
+        jf npm publish \
           --build-name="NPM-Sample-Build" \
           --build-number="${{ github.run_id }}"
 
