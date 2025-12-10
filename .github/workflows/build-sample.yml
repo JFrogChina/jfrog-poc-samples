@@ -173,7 +173,7 @@ jobs:
     - name: Publish NPM Package to Artifactory
       working-directory: ./npm-sample
       run: |
-        jf rt npm-config --repo-resolve=alex-npm --server-id-resolve=$SERVER_ID
+        jf rt npm-config --repo-resolve=alex-npm-virtual --server-id-resolve=$SERVER_ID
         jf rt npm-publish \
           --build-name="NPM-Sample-Build" \
           --build-number="${{ github.run_id }}"
