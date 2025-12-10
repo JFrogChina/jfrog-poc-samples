@@ -167,8 +167,9 @@ jobs:
       working-directory: ./npm-sample
       run: |
         jf rt npm-config --repo-resolve=alex-npm-virtual --server-id-resolve=$SERVER_ID
-        npm install
-        npm run build || echo "no build script defined"
+        jf npm install  \
+          --build-name="NPM-Sample-Build" \
+          --build-number="${{ github.run_id }}"
 
     # Publish to Artifactory NPM Repo
     - name: Publish NPM Package to Artifactory
