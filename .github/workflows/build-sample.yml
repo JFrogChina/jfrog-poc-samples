@@ -111,7 +111,7 @@ jobs:
     - name: Build Summary
       if: always()
       run: |
-         echo "### 🟦 DotNet Build" >> $GITHUB_STEP_SUMMARY
+        echo "### 🟦 DotNet Build" >> $GITHUB_STEP_SUMMARY
         echo "- [Artifacts in Artifactory](${{ vars.JFROG_URL }}/ui/repos/tree/General/${{ env.NUGET_REPO_NAME }}/dotnet-sample)" >> $GITHUB_STEP_SUMMARY
         echo "- [Build Info](${{ vars.JFROG_URL }}/ui/builds/DotNet-Sample-Build/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
