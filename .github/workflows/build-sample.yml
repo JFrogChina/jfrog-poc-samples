@@ -38,9 +38,9 @@ jobs:
           
     # This command adds a new server configuration to the JFrog CLI, as an alternative for using the setup-jfrog-cli action    
     - run: |
-        export SERVER_ID="test"
+        export SERVER_ID="soleng"
         # export NUGET_REPO_NAME="alex-nuget"
-        jf c add $SERVER_ID --url=${{ secrets.JFROG_URL}} --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
+        jf c add $SERVER_ID --url=${{ vars.JFROG_URL}} --access-token=${{ secrets.ARTIFACTORY_ACCESS_TOKEN }} --interactive=false
         jf c use $SERVER_ID
         jf c show
         jf rt ping
